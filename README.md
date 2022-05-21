@@ -6,6 +6,10 @@ DO NOT USE yet.<br/>
 
 However, feel free to let me know if you're interested in the progress of this document.
 
+#### Another good source of information
+
+* https://github.com/captain-coredump/weatherflow-udp
+
 May 2022
 
 ---
@@ -88,6 +92,16 @@ On the Weewx Installation page, follow the topics:
 --- 
 ## Install Weather Flow Tempest module
 
+### Retrieve UDP code
+- Visit https://github.com/captain-coredump/weatherflow-udp
+- Download the .ZIP download of the project from the GitHub web interface
+  - Button: `CODE`
+  - Choose `Download ZIP`
+
+This retrieves: `weatherflow-udp-master.zip`
+
+### Install
+- `sudo wee_extension --install weatherflow-udp-master.zip`
 ---
 
 ## Further Configuration
