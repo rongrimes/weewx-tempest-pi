@@ -102,6 +102,105 @@ This retrieves: `weatherflow-udp-master.zip`
 
 ### Install
 - `sudo wee_extension --install weatherflow-udp-master.zip`
+
+### Edit weewx.config
+
+First, stop weewx.
+  `sudo /etc/init.d/weewx stop`
+
+
+```
+cd /etc/weewx
+sudo vim weewx.conf
+```
+
+- Find the section `[Simulator]`, and delete / comment out all lines in the section.
+- Note: The sections: `[Station] ` (above), and `[StdRESTful]` remain intact.
+- Copy the following section to where `[Simulator]` was previously:
+
+```
+[WeatherFlowUDP]
+    driver = user.weatherflowudp
+    log_raw_packets = False
+    udp_address = <broadcast>
+    # udp_address = 0.0.0.0
+    # udp_address = 255.255.255.255
+    udp_port = 50222
+    udp_timeout = 90
+    share_socket = False
+
+    [[sensor_map]]
+        outTemp = air_temperature.AR-00004444.obs_air
+        outHumidity = relative_humidity.AR-00004444.obs_air
+        pressure =  station_pressure.AR-00004444.obs_air
+        # lightning_strikes =  lightning_strike_count.AR-00004444.obs_air
+        # avg_distance =  lightning_strike_avg_distance.AR-00004444.obs_air
+        outTempBatteryStatus =  battery.AR-00004444.obs_air
+        windSpeed = wind_speed.SK-00001234.rapid_wind
+        windDir = wind_direction.SK-00001234.rapid_wind
+        # lux = illuminance.SK-00001234.obs_sky
+        UV = uv.SK-00001234.obs_sky
+        rain = rain_accumulated.SK-00001234.obs_sky
+        windBatteryStatus = battery.SK-00001234.obs_sky
+        radiation = solar_radiation.SK-00001234.obs_sky
+        # lightningYYY = distance.AR-00004444.evt_strike
+        # lightningZZZ = energy.AR-00004444.evt_strike
+
+```
+(original source: https://github.com/captain-coredump/weatherflow-udp)
+
+I edited the top part to be:
+```
+[WeatherFlowUDP]
+    driver = user.weatherflowudp
+    log_raw_packets = False
+    #   log_raw_packets = True
+    #   udp_address = <broadcast>
+    #   udp_address = 0.0.0.0
+    udp_address = 255.255.255.255
+    udp_port = 50222
+    udp_timeout = 90
+    share_socket = False
+```
+  
+In the top section (`[Station]`), edit `station_type` to:  
+`station_type = WeatherFlowUDP`
+
+### Station Identification
+The sample code is for data coming from station ID `AR-00004444`. You now need to find out *your* station ID.
+  
+(following captain-coredump/weatherflow-udp):
+  
+- Set `log_raw_packets = True`
+- Restart weewx.  
+  `sudo /etc/init.d/weewx start`
+  
+*weewx* will start watching for the UDP packets from the Tempest and dump them in the log. We can see this information with:
+  
+ `sudo tail -f /var/log/syslog`
+  
+ You are looking for records like:
+  ```
+ May 26 22:26:55 raspberrypiZ2-2 weewxd: weatherflowudp: MainThread: raw packet: {'serial_number': 'ST-00052000', 'type': 'rapid_wind', 'hub_sn': 'HB-00041000', 'ob': [1653618412, 0.52, 315]}
+May 26 22:28:25 raspberrypiZ2-2 weewxd: weatherflowudp: MainThread: raw packet: {'serial_number': 'ST-00052000', 'type': 'rapid_wind', 'hub_sn': 'HB-00041000', 'ob': [1653618504, 0.29, 312]}
+May 26 22:28:26 raspberrypiZ2-2 weewxd: weatherflowudp: MainThread: raw packet: {'serial_number': 'ST-00052000', 'type': 'device_status', 'hub_sn': 'HB-00041000', 'timestamp': 1653618505, 'uptime': 26712917, 'voltage': 2.763, 'firmware_revision': 156, 'rssi': -64, 'hub_rssi': -64, 'sensor_status': 131072, 'debug': 0}
+  ```
+ (I have slightly obfuscated the serial numbers).
+  
+ Terminate the log viewing with Ctl-C.
+  
+ ### Insert your Serial number into weewx.conf
+  
+ - Stop *weewx* (`sudo /etc/init.d/weewx stop`)
+ - We want the Tempest serial number (here: ST-000520000) in the sensor map code:  
+  In /etc/weewx/weewx.conf, search/replace AR-00004444 (and SK-00001234), and replace with ST-000052000 (but with what you found in your log file)
+ - Restart weewx.  
+  `sudo /etc/init.d/weewx start`
+ - Let run for 10 - 15 minutes (or more).
+  
+ ### View web pages
+
+
 ---
 
 ## Further Configuration
