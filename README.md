@@ -1,14 +1,16 @@
 # weewx-pi
 
-#### Development
-This note is under development. I am updating as I get the installation correct.<br/>
-DO NOT USE yet.<br/>
+#### Development Note
+This document is under development. The content is advanced enough to enable you to set up *weewx* to retrieve data from your Tempest from a Raspberry Pi. Formatting, layout and content clarification are under active development.
 
-However, feel free to let me know if you're interested in the progress of this document.
+Feel free to let me know if you're interested in the progress of this document.
 
 #### Another good source of information
 
+Much of my content is derived from:  
 * https://github.com/captain-coredump/weatherflow-udp
+
+However, there was not a straight forward cookbook approach to setting up *weewx* with a Tempest; hence this document. I hope it helps someone.
 
 May 2022
 
@@ -16,7 +18,7 @@ May 2022
 
 ## Introduction
 
-This note describes setting up a **Raspberry Pi** to process the results from a **Weather Flow Tempest**.
+This document describes setting up *weewx* to process the results from a **Weather Flow Tempest**.
 
 I have the following hardware:
 
@@ -71,7 +73,7 @@ The _weewx_ installation will ask for the following:
 | Value | Note |
 | --- | --- |
 | **Location of Weather Station** | Enter the name/location of the station. Use the Tempest name, but any name will do (example: Cherry Beach) |
-| **latitude, Longitude** | Enter the decimal values of the site co-ordinates.<br/>(Note: installation allows any input here and doesn't check. However, hidden system errors occur at runtime with badly formed values.) |
+| **latitude, Longitude** | Enter the decimal values of the site co-ordinates.<br/>(Note: installation allows any input here and doesn't check. However, hidden system errors occur at runtime when you supply badly formed values.) |
 | **Altitude** | Enter site altitude as directed. |
 | **display units** | Make a choice. Further adjustments are easy to make later in the configuration file. |
 | **Weather Station hardware Type** | Choose: **Simulator**. |
@@ -82,8 +84,8 @@ On the Weewx Installation page, follow the topics:
 
 | Value | Note |
 | --- | --- |
-| **Status** | Log entries will appear. There values are unimportant at this time. |
-| **Verify** | Web pages should appear at `/var/www/html/weewx/index.html` |
+| **Status** | Log entries will appear. These values are unimportant at this time. |
+| **Verify** | Web pages to appear at `/var/www/html/weewx/index.html` |
 | **Customize** | Ignore (for now). |
 | **Start/Stop** | Stop _weewx_. (`sudo /etc/init.d/weewx stop`) |
 | **Uninstall** | Ignore. |
@@ -166,8 +168,35 @@ I edited the top part to be:
 In the top section (`[Station]`), edit `station_type` to:  
 `station_type = WeatherFlowUDP`
 
-### Station Identification
-The sample code is for data coming from station ID `AR-00004444`. You now need to find out *your* station ID.
+### Replace [[sensor_map]]
+
+- Discard [[sensor_map]] contents.
+- Follow https://github.com/captain-coredump/weatherflow-udp/blob/master/sample_Tempest_sensor_map
+- Insert [[sensor_map]] contents from `sample_Tempest_sensor_map`, or from below:
+```
+ # This section is for the TEMPEST WeatherFlow Bridge packets, via UDP broadcast on local subnet
+
+    [[sensor_map]]
+        outTemp = air_temperature.ST-00000025.obs_st
+        outHumidity = relative_humidity.ST-00000025.obs_st
+        pressure = station_pressure.ST-00000025.obs_st
+        #lightning_strikes =  lightning_strike_count.ST-00000025.obs_st
+        #avg_distance =  lightning_strike_avg_distance.ST-00000025.obs_st
+        outTempBatteryStatus = battery.ST-00000025.obs_st
+        windSpeed = wind_speed.ST-00000025.rapid_wind
+        windDir = wind_direction.ST-00000025.rapid_wind
+        #luxXXX = illuminance.ST-00000025.obs_st
+        UV = uv.ST-00000025.obs_st
+        rain = rain_accumulated.ST-00000025.obs_st
+        windBatteryStatus = battery.ST-00000025.obs_st
+        radiation = solar_radiation.ST-00000025.obs_st
+        #lightningXXX = distance.ST-00000025.evt_strike
+        #lightningYYY = energy.ST-00000025.evt_strike
+```
+
+
+### Get Your Station Identification
+The sample code is for data coming from station ID `ST-00000025`. You now need to find out *your* station ID.
   
 (following captain-coredump/weatherflow-udp):
   
@@ -193,28 +222,57 @@ May 26 22:28:26 raspberrypiZ2-2 weewxd: weatherflowudp: MainThread: raw packet: 
   
  - Stop *weewx* (`sudo /etc/init.d/weewx stop`)
  - We want the Tempest serial number (here: ST-000520000) in the sensor map code:  
-  In /etc/weewx/weewx.conf, search/replace AR-00004444 (and SK-00001234), and replace with ST-000052000 (but with what you found in your log file)
+  In /etc/weewx/weewx.conf, search/replace ST-00000025, and replace with ST-000052000 (but with what you found in your log file)
  - Restart weewx.  
   `sudo /etc/init.d/weewx start`
  - Let run for 10 - 15 minutes (or more).
   
  ### View web pages
+*weewx* has main ouput in web pages at: `/var/www/html/weewx`. To see if *weewx* is working for you, browse the index.html file.  
+`vim /var/www/html/weewx/index.html`
 
+Browse down and look for output like:
+```
+  <div class="widget_contents">
+  <table>
+    <tbody>
+      <tr>
+        <td class="label">Outside Temperature</td>
+        <td class="data">61.7&#176;F</td>
+      </tr>
+      <tr>
+        <td class="label">Heat Index</td>
+        <td class="data">61.0&#176;F</td>
+      </tr>
+      <tr>
+        <td class="label">Wind Chill</td>
+        <td class="data">61.7&#176;F</td>
+      </tr>
+      <tr>
+        <td class="label">Dew Point</td>
+        <td class="data">52.6&#176;F</td>
+      </tr>
+```
+What's notable here is:  
+**Outside Temperature** appears with a value of **61.7**. If *weewx* is not configured correctly, you will likely see **N/A**.
 
 ---
 
 ## Further Configuration
-#### Weather Underground
 
-### Output to web site
+### Measururement Units
 
 ---
 
-## Edit template(s)
+### Output to web site
+
+#### Edit template(s)
 
 ---
 
 ## Additional reporting sites
+
+### Weather Underground
 
 ### AWEKAS
 
