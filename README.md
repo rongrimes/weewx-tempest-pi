@@ -51,6 +51,12 @@ I am using:<br/>
 - Install SD card into the Pi Zero and start up as usual.
 - Configure _ssh_ to run for remote access.
 
+#### Other software load
+I use `vim` for editing, and the text below uses vim. Any other editor is just as suitable. Here is the installation command for reference:
+```
+sudo apt install vim
+```
+
 ### dietpi
 I tried to install _weewx_ with the [**dietpi**](https://dietpi.com/) distro. _weewx_ found all sorts of modules missing and it just wasn't worth the effort to continue. 
 
