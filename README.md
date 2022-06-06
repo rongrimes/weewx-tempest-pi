@@ -283,3 +283,17 @@ What's notable here is:
 ### AWEKAS
 
 ### Weather Cloud, etc
+
+---
+
+## My Scratch area
+This is a "pending notes" area. These notes will eventually be added into the main body, or discarded.
+
+#### Other changes
+1. FTP enabled and sent to the _infinityfree_ website
+1. #FTP.last removed when necessary
+1. USB to ethernet adaptor added; wireless lan turned off 
+
+#### TODO
+1. Edit units
+2. install weatherunderground, AWEKAS, etc.
