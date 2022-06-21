@@ -266,7 +266,16 @@ What's notable here is:
 
 ## Further Configuration
 
-### Measururement Units
+### Measurement Units
+
+The default measurement units for *StdReport* appear in `/etc/weewx/weewx.conf` and set to imperial units. I set mine to the following (Canadian standard).
+
+1. Navigate to: **StdReport** >> **Defaults**
+1. Set `unit_system = metric`
+1. Navigate a few lines down to **Units** >> **Groups**, and edit the `group_pressure line` to read:
+```
+        group_pressure = kPa    # Options are 'inHg', 'mmHg', 'mbar', 'hPa', or 'kPa'
+```
 
 ---
 
@@ -286,14 +295,23 @@ What's notable here is:
 
 ---
 
+## Implementation Notes
+### Network Connection: Wireless > Ethernet
+
+I found the wireless connection got faulty after a few days. The symptom being that *weewx* would lose data and show temperature (and other readings) as **N/A** with  the daily graphs being dots instead of continuous lines.
+
+Cure: I turned off wireless and used ethernet-to-usb. The data reception was rock solid from then on.
+
+---
+
+---
+
 ## My Scratch area
 This is a "pending notes" area. These notes will eventually be added into the main body, or discarded.
 
 #### Other changes
 1. FTP enabled and sent to the _infinityfree_ website
 1. #FTP.last removed when necessary
-1. USB to ethernet adaptor added; wireless lan turned off 
 
 #### TODO
-1. Edit units
-2. install weatherunderground, AWEKAS, etc.
+1. install weatherunderground, AWEKAS, etc.
