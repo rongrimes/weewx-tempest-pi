@@ -276,7 +276,10 @@ The default measurement units for *StdReport* appear in `/etc/weewx/weewx.conf` 
 ```
         group_pressure = kPa    # Options are 'inHg', 'mmHg', 'mbar', 'hPa', or 'kPa'
 ```
-
+4. Restart *weewx*.
+```
+sudo /etc/init.d/weewx restart
+```
 ---
 
 ### Output to web site
