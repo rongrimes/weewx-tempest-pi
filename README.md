@@ -268,13 +268,15 @@ What's notable here is:
 
 ### Measurement Units
 
-The default measurement units for *StdReport* appear in `/etc/weewx/weewx.conf` and set to imperial units. I set mine to the following (Canadian standard).
+The default measurement units for *StdReport* appear in `/etc/weewx/weewx.conf` and are set to US units. I set mine to the following (Canadian standard).
 
-1. Navigate to: **StdReport** >> **Defaults**
+1. In `/etc/weewx/weewx.conf`, navigate to: **StdReport** >> **Defaults**
 1. Set `unit_system = metric`
-1. Navigate a few lines down to **Units** >> **Groups**, and edit the `group_pressure line` to read:
+1. Navigate a few lines down to **Units** >> **Groups**, and edit the respective lines to read:
 ```
-        group_pressure = kPa    # Options are 'inHg', 'mmHg', 'mbar', 'hPa', or 'kPa'
+    group_pressure  = kPa          # Options are 'inHg', 'mmHg', 'mbar', 'hPa', or 'kPa'
+    group_rain      = mm           # Options are 'inch', 'cm', or 'mm'
+    group_rainrate  = mm_per_hour  # Options are 'inch_per_hour', 'cm_per_hour', or 'mm_per_hour'
 ```
 4. Restart *weewx*.
 ```
