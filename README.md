@@ -333,3 +333,4 @@ This is a "pending notes" area. These notes will eventually be added into the ma
 
 #### TODO
 1. install weatherunderground, AWEKAS, etc.
+2. Add references.
