@@ -64,13 +64,13 @@ I tried to install _weewx_ with the [**dietpi**](https://dietpi.com/) distro. _w
 
 ## weewx
 
-To retrieve and install weewx, follow the guide at [**WeeWX: Installation on Debian-based systems**](https://weewx.com/docs/debian.htm)
+The guide at [**WeeWX: Installation on Debian-based systems**](https://weewx.com/docs/debian.htm) describes installing *weewx* on Debian / Reaspberry Pi systems. The steps below give you a guide through the essential sections.
 
 ### Retrieve, Install weewx
 
 On the Weewx Installation page, follow the topics:
-- [Configure apt](https://weewx.com/docs/debian.htm#configure_apt)
-- [Install](https://weewx.com/docs/debian.htm#Install)
+- [Configure apt](https://weewx.com/docs/debian.htm#configure_apt) - shows specifics of retrieving with *apt*
+- [Install](https://weewx.com/docs/debian.htm#Install) *weewx*
 
 #### Installation Notes
 
@@ -223,7 +223,7 @@ May 26 22:28:26 raspberrypiZ2-2 weewxd: weatherflowudp: MainThread: raw packet: 
  ### Insert your Serial number into weewx.conf
   
  - We want the Tempest serial number (here: ST-000520000) in the sensor map code:  
-  In /etc/weewx/weewx.conf, search/replace ST-00000025, and replace with ST-000052000 (but with what you found in your log file)
+  In /etc/weewx/weewx.conf, search/replace ST-00000025, and replace with ST-00052000 (but with what you found in your log file)
  - Restart weewx.  
   `sudo /etc/init.d/weewx restart`
  - Let run for 10 - 15 minutes (or more).
