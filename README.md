@@ -281,6 +281,13 @@ sudo /etc/init.d/weewx restart
 
 ### Output to web site using FTP
 
+I use <a href="https://www.infinityfree.net/" target="_blank">Infinity Free</a> as a web hosting site. It's:
+* free
+* allows regular ftp upload
+* is mostly smooth in producing pages
+
+... and suits my non-professional purposes.
+
 Use the notes in [FTP](https://weewx.com/docs/usersguide.htm#config_FTP) in the weewx users guide for FTP transfer.
 
 For illustration, I have configured:
@@ -301,7 +308,6 @@ port = 21
 # Set to 1 to use passive mode, zero for active mode
 passive = 1
 ```
-I use <a href="https://www.infinityfree.net/" target="_blank">Infinity Free</a> as a web hosting site. It's free, allows regular ftp upload and is mostly smooth in producing pages. It suits my non-professional purposes.
 
 #### Edit template(s)
 
