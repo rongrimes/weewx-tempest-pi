@@ -281,13 +281,13 @@ sudo /etc/init.d/weewx restart
 
 ### Output to web site using FTP
 
-Use the notes in https://weewx.com/docs/usersguide.htm#Reports for FTP transfer.
+Use the notes in [FTP](https://weewx.com/docs/usersguide.htm#config_FTP) in the weewx users guide for FTP transfer.
 
 For illustration, I have configured:
 ```
 enable = true
-user = epiz_29redacted
-password = UWredacted
+user = epiz_redacted
+password = redacted
 server = ftpupload.net    # The ftp server name, e.g, www.myserver.org
 path = /rongrimes.42web.io/htdocs    # The destination directory, e.g., /weather
 
