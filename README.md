@@ -279,7 +279,29 @@ sudo /etc/init.d/weewx restart
 ```
 ---
 
-### Output to web site
+### Output to web site using FTP
+
+Use the notes in https://weewx.com/docs/usersguide.htm#Reports for FTP transfer.
+
+For illustration, I have configured:
+```
+enable = true
+user = epiz_29redacted
+password = UWredacted
+server = ftpupload.net    # The ftp server name, e.g, www.myserver.org
+path = /rongrimes.42web.io/htdocs    # The destination directory, e.g., /weather
+
+# Set to True for an FTP over TLS (FTPS) connection. Not all servers
+# support this.
+secure_ftp = False
+
+# Most FTP servers use port 21
+port = 21
+
+# Set to 1 to use passive mode, zero for active mode
+passive = 1
+```
+I use <a href="https://www.infinityfree.net/" target="_blank">Infinity Free</a> as a web hosting site. It's free, allows regular ftp upload and is mostly smooth in producing pages. It suits my non-professional purposes.
 
 #### Edit template(s)
 
@@ -308,10 +330,6 @@ Cure: I turned off wireless and used ethernet-to-usb. The data reception was roc
 
 ## My Scratch area
 This is a "pending notes" area. These notes will eventually be added into the main body, or discarded.
-
-#### Other changes
-1. FTP enabled and sent to the _infinityfree_ website
-1. #FTP.last removed when necessary
 
 #### TODO
 1. install weatherunderground, AWEKAS, etc.
