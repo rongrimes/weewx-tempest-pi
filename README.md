@@ -1,7 +1,7 @@
-# weewx-pi
+# weewx-tempest-pi
 
 #### Development Note
-This document is under development. The content is advanced enough to enable you to set up *weewx* to retrieve data from your Tempest from a Raspberry Pi. Formatting, layout and content clarification are under active development.
+This document is under development. The content is advanced enough to enable you to set up *weewx* to retrieve data from your Weatherflow Tempest from a Raspberry Pi. Formatting, layout and content clarification are under active development.
 
 Feel free to let me know if you're interested in the progress of this document.
 
@@ -10,7 +10,7 @@ Feel free to let me know if you're interested in the progress of this document.
 Much of my content is derived from:  
 * https://github.com/captain-coredump/weatherflow-udp
 
-However, there was not a straight forward cookbook approach to setting up *weewx* with a Tempest; hence this document. I hope it helps someone.
+However, there was not a straight forward cookbook approach to setting up *weewx* with a Weatherflow Tempest; hence this document. I hope it helps someone.
 
 May 2022
 
@@ -35,9 +35,9 @@ I have the following hardware:
 * **WOW**
 
 ### Full disclosure :)  
-I have had the _Tempest_ running with _weewx_ software on a _Raspberry Pi 4 2 GB_ platform for 9 months. I think that a better $ value is to have _weewx_ running on a _Pi Zero 2_. 
+I have had the _Weatherflow Tempest_ running with _weewx_ software on a _Raspberry Pi 4 2 GB_ platform for 9 months. I think that a better $ value is to have _weewx_ running on a _Pi Zero 2_. 
 
-This document is being written as I convert the station from the _Pi 4_ to _Pi Zero 2_. Since I am converting from an existing system, I may leave a few bits out. If they are annoying, or the document could be improved, please let me know. If otherwise, then, just Sorry!
+This document is being written as I convert the station from the _Pi 4_ to _Pi Zero 2_. Since I am converting from an existing system, I may leave a few bits out. If they are annoying, or the document could be improved, please let me know. If otherwise, then, just: Sorry!
 
 ---
 
@@ -112,10 +112,6 @@ This retrieves: `weatherflow-udp-master.zip`
 - `sudo wee_extension --install weatherflow-udp-master.zip`
 
 ### Edit weewx.config
-
-First, stop weewx.
-  `sudo /etc/init.d/weewx stop`
-
 
 ```
 cd /etc/weewx
@@ -208,7 +204,7 @@ The sample code is for data coming from station ID `ST-00000025`. You now need t
   
 - Set `log_raw_packets = True`
 - Restart weewx.  
-  `sudo /etc/init.d/weewx start`
+  `sudo /etc/init.d/weewx restart`
   
 *weewx* will start watching for the UDP packets from the Tempest and dump them in the log. We can see this information with:
   
@@ -220,21 +216,20 @@ The sample code is for data coming from station ID `ST-00000025`. You now need t
 May 26 22:28:25 raspberrypiZ2-2 weewxd: weatherflowudp: MainThread: raw packet: {'serial_number': 'ST-00052000', 'type': 'rapid_wind', 'hub_sn': 'HB-00041000', 'ob': [1653618504, 0.29, 312]}
 May 26 22:28:26 raspberrypiZ2-2 weewxd: weatherflowudp: MainThread: raw packet: {'serial_number': 'ST-00052000', 'type': 'device_status', 'hub_sn': 'HB-00041000', 'timestamp': 1653618505, 'uptime': 26712917, 'voltage': 2.763, 'firmware_revision': 156, 'rssi': -64, 'hub_rssi': -64, 'sensor_status': 131072, 'debug': 0}
   ```
- (I have slightly obfuscated the serial numbers).
+ (I have slightly obfuscated the serial numbers from my own Weatherflow Tempest).
   
  Terminate the log viewing with Ctl-C.
   
  ### Insert your Serial number into weewx.conf
   
- - Stop *weewx* (`sudo /etc/init.d/weewx stop`)
  - We want the Tempest serial number (here: ST-000520000) in the sensor map code:  
   In /etc/weewx/weewx.conf, search/replace ST-00000025, and replace with ST-000052000 (but with what you found in your log file)
  - Restart weewx.  
-  `sudo /etc/init.d/weewx start`
+  `sudo /etc/init.d/weewx restart`
  - Let run for 10 - 15 minutes (or more).
   
  ### View web pages
-*weewx* has main ouput in web pages at: `/var/www/html/weewx`. To see if *weewx* is working for you, browse the index.html file.  
+*weewx* has main ouput in web pages at: `/var/www/html/weewx`. To see if *weewx* is working for you, view the index.html file.  
 `vim /var/www/html/weewx/index.html`
 
 Browse down and look for output like:
