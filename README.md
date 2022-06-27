@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This document describes setting up *weewx* to process the results from a **Weather Flow Tempest** and is derived from:
+This document describes setting up [*weewx*](https://weewx.com/) to process the results from a [**Weather Flow Tempest**](https://weatherflow.com/tempest-weather-system/) and is derived from:
 * [WeeWX documentation](https://weewx.com/docs.html)
 * https://github.com/captain-coredump/weatherflow-udp
 
-However, there was not a straight forward cookbook approach to setting up *weewx* with a Weatherflow Tempest; hence this document. I hope it helps someone.
+However, there is not a straightforward cookbook approach to setting up *weewx* with a Weatherflow Tempest; hence this document. I hope it helps someone.
 
 This document assumes basic knowleddege of a Raspberry Pi and of Linux. If this does not describe you and you want a more detailed approach let me know. I (may, will) add more details in relevant places.
 
@@ -29,7 +29,7 @@ I have the following hardware:
 * **weewx Weather reporting**
 * **WOW**
 
-### Full disclosure :)  
+### Full disclosure 😀  
 I have had the _Weatherflow Tempest_ running with _weewx_ software on a _Raspberry Pi 4 2 GB_ platform for 9 months. I think that a better $ value is to have _weewx_ running on a _Pi Zero 2_. 
 
 This document is being written as I convert the station from the _Pi 4_ to _Pi Zero 2_. Since I am converting from an existing system, I may leave a few bits out. If they are annoying, or the document could be improved, please let me know. If otherwise, then, just: Sorry!
@@ -171,6 +171,7 @@ The sample code is for data coming from station ID `ST-00000025`. You now need t
 (following captain-coredump/weatherflow-udp):
   
 - Set `log_raw_packets = True`
+- Save the configuration file (`weewx.conf`).
 - Restart weewx.  
   `sudo /etc/init.d/weewx restart`
   
@@ -193,13 +194,13 @@ May 26 22:28:26 raspberrypiZ2-2 weewxd: weatherflowudp: MainThread: raw packet: 
  ## Insert your Serial number into weewx.conf
   
  - We want the Tempest serial number (here: ST-000520000) in the sensor map code:  
-  In /etc/weewx/weewx.conf, search/replace ST-00000025, and replace with ST-00052000 (but with what you found in your log file)
+  In /etc/weewx/weewx.conf, search/replace **ST-00000025**, and replace with **ST-00052000** (but with what you found in your log file)
  - Restart weewx.  
   `sudo /etc/init.d/weewx restart`
  - Let run for 10 - 15 minutes (or more).
   
 ### View web pages
-*weewx* has main ouput in web pages at: `/var/www/html/weewx`. To see if *weewx* is working for you, view the index.html file.  
+*weewx* has main ouput in web pages at: `/var/www/html/weewx`. To see if *weewx* is working for you, view the web `index.html` file.  
 `vim /var/www/html/weewx/index.html`
 
 Browse down and look for output like:
@@ -233,7 +234,7 @@ What's notable here is:
 
 ### Measurement Units
 
-The default measurement units for *StdReport* appear in `/etc/weewx/weewx.conf` and are set to US units. I set mine to the following (Canadian standard).
+The default measurement units for *StdReport* appear in `/etc/weewx/weewx.conf` and are set to US units. I set mine to the following (Canadian units):
 
 1. In `/etc/weewx/weewx.conf`, navigate to: **StdReport** >> **Defaults**
 1. Set `unit_system = metric`
@@ -279,8 +280,6 @@ port = 21
 passive = 1
 ```
 
-#### Edit template(s)
-
 ---
 
 ## Additional reporting sites
@@ -309,3 +308,4 @@ This is a "pending notes" area. These notes will eventually be added into the ma
 
 #### TODO
 1. Install Weather Underground, AWEKAS, etc.
+2. Edit _templates_
