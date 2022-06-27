@@ -104,14 +104,14 @@ This retrieves: `weatherflow-udp-master.zip`
 ### Install
 - `sudo wee_extension --install weatherflow-udp-master.zip`
 
-### Edit weewx.config
+### Edit the configuration file: weewx.config
 
 ```
 cd /etc/weewx
 sudo vim weewx.conf
 ```
 
-### [Simulator] > [WeatherFlowUDP]
+### Replace [Simulator] section with [WeatherFlowUDP] content
 - Find the section `[Simulator]`, and delete / comment out all lines in the section.
 - Note: The sections: `[Station] ` (above), and `[StdRESTful]` remain intact.
 - Copy the following section to where `[Simulator]` was previously:
@@ -161,14 +161,36 @@ I edited the top part to be:
     share_socket = False
 ```
 
+### [[sensor_map]]
+Replace the sensor_map section with the following content:  
+```
+    # This section is for the TEMPEST WeatherFlow Bridge packets, via UDP broadcast on local subnet
+
+    [[sensor_map]]
+        outTemp = air_temperature.ST-00000025.obs_st
+        outHumidity = relative_humidity.ST-00000025.obs_st
+        pressure = station_pressure.ST-00000025.obs_st
+        #lightning_strikes =  lightning_strike_count.ST-00000025.obs_st
+        #avg_distance =  lightning_strike_avg_distance.ST-00000025.obs_st
+        outTempBatteryStatus = battery.ST-00000025.obs_st
+        windSpeed = wind_speed.ST-00000025.rapid_wind
+        windDir = wind_direction.ST-00000025.rapid_wind
+        #luxXXX = illuminance.ST-00000025.obs_st
+        UV = uv.ST-00000025.obs_st
+        rain = rain_accumulated.ST-00000025.obs_st
+        windBatteryStatus = battery.ST-00000025.obs_st
+        radiation = solar_radiation.ST-00000025.obs_st
+        #lightningXXX = distance.ST-00000025.evt_strike
+        #lightningYYY = energy.ST-00000025.evt_strike
+```
+ref: `https://github.com/captain-coredump/weatherflow-udp/blob/master/sample_Tempest_sensor_map`.
+
 ### [[Station]]
 In the (`[Station]`) section near the top of the configuration file, edit:  
 ```station_type = WeatherFlowUDP```
 
 ### Get Your Station Identification
 The sample code is for data coming from station ID `ST-00000025`. You now need to find out *your* station ID.
-  
-(following captain-coredump/weatherflow-udp):
   
 - Set `log_raw_packets = True`
 - Save the configuration file (`weewx.conf`).
@@ -227,6 +249,14 @@ Browse down and look for output like:
 ```
 What's notable here is:  
 **Outside Temperature** appears with a value of **61.7**. If *weewx* is not configured correctly, you will likely see **N/A**.
+
+### Turn off Station Identification
+When you are satisfied that you are getting the UDP packets from the Tempest hub, you will want to turn off `log_raw_packets` since it will put lots of now unnecessary stuff in the system log. Edit the configuration file (`weewx.conf`).
+  
+- Set `log_raw_packets = False`
+- Save the configuration file.
+- Restart weewx.  
+  `sudo /etc/init.d/weewx restart`
 
 ---
 
