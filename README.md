@@ -3,8 +3,8 @@
 ## Introduction
 
 This document describes setting up [*weewx*](https://weewx.com/) to process the results from a [**Weather Flow Tempest**](https://weatherflow.com/tempest-weather-system/) and is derived from:
-* [WeeWX documentation](https://weewx.com/docs.html)
-* https://github.com/captain-coredump/weatherflow-udp
+* <a href="https://weewx.com/docs.html" target="_blank">WeeWX documentation</a>
+* <a href="https://github.com/captain-coredump/weatherflow-udp" target="_blank">//github.com/captain-coredump/weatherflow-udp</a>
 
 However, there is not a straightforward cookbook approach to setting up *weewx* with a Weatherflow Tempest; hence this document. I hope it helps someone.
 
@@ -30,7 +30,7 @@ I have the following hardware:
 * **WOW**
 
 ### Full disclosure 😀  
-I have had the _Weatherflow Tempest_ running with _weewx_ software on a _Raspberry Pi 4 2 GB_ platform for 9 months. I think that a better $ value is to have _weewx_ running on a _Pi Zero 2_. 
+I have had the _Weatherflow Tempest_ running with _weewx_ software on a _Raspberry Pi 4 2 GB_ platform xince July 2021. Now, I think that a better $ value is to have _weewx_ running on a _Pi Zero 2_. 
 
 This document is being written as I convert the station from the _Pi 4_ to _Pi Zero 2_. Since I am converting from an existing system, I may leave a few bits out. If they are annoying, or the document could be improved, please let me know. If otherwise, then, just: Sorry!
 
@@ -47,7 +47,7 @@ I am using:<br/>
 - Configure _ssh_ to run for remote access.
 
 #### Other software load
-I use `vim` for editing, and the text below uses vim. Any other editor is just as suitable. Here is the installation command for reference:
+I use `vim` for editing and show it below; any other text editor is just as suitable. Here is the installation command for reference:
 ```
 sudo apt install vim
 ```
@@ -62,7 +62,7 @@ I tried to install _weewx_ with the [**dietpi**](https://dietpi.com/) distro. _w
 ### Retrieve, Install weewx
 
 From the WeeWx Documentation, follow the topics:
-- [Configure apt](https://weewx.com/docs/debian.htm#configure_apt) - shows the specifics of retrieving _weewx_with *apt*
+- [Configure apt](https://weewx.com/docs/debian.htm#configure_apt) - shows the specifics of retrieving *weewx* with *apt*.
 - [Install](https://weewx.com/docs/debian.htm#Install) *weewx*
 
 #### Installation Notes
@@ -104,6 +104,8 @@ This retrieves: `weatherflow-udp-master.zip`
 ### Install
 - `sudo wee_extension --install weatherflow-udp-master.zip`
 
+---
+
 ### Edit the configuration file: weewx.config
 
 ```
@@ -111,10 +113,15 @@ cd /etc/weewx
 sudo vim weewx.conf
 ```
 
+### [[Station]]
+In the `[Station]` section near the top of the configuration file, edit:  
+```
+    station_type = WeatherFlowUDP
+```
+
 ### Replace [Simulator] section with [WeatherFlowUDP] content
-- Find the section `[Simulator]`, and delete / comment out all lines in the section.
-- Note: The sections: `[Station] ` (above), and `[StdRESTful]` remain intact.
-- Copy the following section to where `[Simulator]` was previously:
+- Find the section `[Simulator]`, and delete / comment out all lines in the section, including `[Simulator]`.
+- Copy the following lines to where `[Simulator]` was previously:
 
 ```
 [WeatherFlowUDP]
@@ -185,14 +192,15 @@ Replace the sensor_map section with the following content:
 ```
 ref: `https://github.com/captain-coredump/weatherflow-udp/blob/master/sample_Tempest_sensor_map`.
 
-### [[Station]]
-In the (`[Station]`) section near the top of the configuration file, edit:  
-```station_type = WeatherFlowUDP```
+---
 
 ### Get Your Station Identification
 The sample code is for data coming from station ID `ST-00000025`. You now need to find out *your* station ID.
   
-- Set `log_raw_packets = True`
+- Under `[WeatherFlowUDP]` set:
+```
+    log_raw_packets = True
+```
 - Save the configuration file (`weewx.conf`).
 - Restart weewx.  
   `sudo /etc/init.d/weewx restart`
@@ -215,8 +223,8 @@ May 26 22:28:26 raspberrypiZ2-2 weewxd: weatherflowudp: MainThread: raw packet: 
   
  ## Insert your Serial number into weewx.conf
   
- - We want the Tempest serial number (here: ST-000520000) in the sensor map code:  
-  In /etc/weewx/weewx.conf, search/replace **ST-00000025**, and replace with **ST-00052000** (but with what you found in your log file)
+ - We want the Tempest serial number (here: ST-00052000) in the sensor map code:  
+  In /etc/weewx/weewx.conf, search/replace **ST-00000025** with **ST-00052000** (but with what you found in your log file)
  - Restart weewx.  
   `sudo /etc/init.d/weewx restart`
  - Let run for 10 - 15 minutes (or more).
@@ -251,7 +259,7 @@ What's notable here is:
 **Outside Temperature** appears with a value of **61.7**. If *weewx* is not configured correctly, you will likely see **N/A**.
 
 ### Turn off Station Identification
-When you are satisfied that you are getting the UDP packets from the Tempest hub, you will want to turn off `log_raw_packets` since it will put lots of now unnecessary stuff in the system log. Edit the configuration file (`weewx.conf`).
+When you are satisfied that *weewx* is getting the UDP packets from the Tempest hub, you will want to turn off `log_raw_packets` since it will put lots of now unnecessary stuff in the system log. Edit the configuration file (`weewx.conf`).
   
 - Set `log_raw_packets = False`
 - Save the configuration file.
@@ -289,7 +297,7 @@ I use <a href="https://www.infinityfree.net/" target="_blank">Infinity Free</a> 
 
 ... and suits my non-professional purposes.
 
-Use the notes in [FTP](https://weewx.com/docs/usersguide.htm#config_FTP) in the weewx users guide for FTP transfer.
+Use the notes in <a href="https://weewx.com/docs/usersguide.htm#config_FTP" target="_blank">FTP</a> in the *weewx* User's Guide for FTP transfer.
 
 For illustration, I have configured:
 ```
