@@ -1,24 +1,19 @@
 # weewx-tempest-pi
 
-#### Development Note
-This document is under development. The content is advanced enough to enable you to set up *weewx* to retrieve data from your Weatherflow Tempest from a Raspberry Pi. Formatting, layout and content clarification are under active development.
+## Introduction
 
-Feel free to let me know if you're interested in the progress of this document.
-
-#### Another good source of information
-
-Much of my content is derived from:  
+This document describes setting up *weewx* to process the results from a **Weather Flow Tempest** and is derived from:
+* [WeeWX documentation](https://weewx.com/docs.html)
 * https://github.com/captain-coredump/weatherflow-udp
 
 However, there was not a straight forward cookbook approach to setting up *weewx* with a Weatherflow Tempest; hence this document. I hope it helps someone.
 
-May 2022
+This document assumes basic knowleddege of a Raspberry Pi and of Linux. If this does not describe you and you want a more detailed approach let me know. I (may, will) add more details in relevant places.
+
+June 2022
 
 ---
 
-## Introduction
-
-This document describes setting up *weewx* to process the results from a **Weather Flow Tempest**.
 
 I have the following hardware:
 
@@ -64,12 +59,10 @@ I tried to install _weewx_ with the [**dietpi**](https://dietpi.com/) distro. _w
 
 ## weewx
 
-The guide at [**WeeWX: Installation on Debian-based systems**](https://weewx.com/docs/debian.htm) describes installing *weewx* on Debian / Reaspberry Pi systems. The steps below give you a guide through the essential sections.
-
 ### Retrieve, Install weewx
 
-On the Weewx Installation page, follow the topics:
-- [Configure apt](https://weewx.com/docs/debian.htm#configure_apt) - shows specifics of retrieving with *apt*
+From the WeeWx Documentation, follow the topics:
+- [Configure apt](https://weewx.com/docs/debian.htm#configure_apt) - shows the specifics of retrieving _weewx_with *apt*
 - [Install](https://weewx.com/docs/debian.htm#Install) *weewx*
 
 #### Installation Notes
@@ -100,7 +93,7 @@ On the Weewx Installation page, follow the topics:
 --- 
 ## Install Weather Flow Tempest module
 
-### Retrieve UDP code
+### Retrieve weatherflow UDP code
 - Visit https://github.com/captain-coredump/weatherflow-udp
 - Download the .ZIP download of the project from the GitHub web interface
   - Button: `CODE`
@@ -118,6 +111,7 @@ cd /etc/weewx
 sudo vim weewx.conf
 ```
 
+### [Simulator] > [WeatherFlowUDP]
 - Find the section `[Simulator]`, and delete / comment out all lines in the section.
 - Note: The sections: `[Station] ` (above), and `[StdRESTful]` remain intact.
 - Copy the following section to where `[Simulator]` was previously:
@@ -166,36 +160,10 @@ I edited the top part to be:
     udp_timeout = 90
     share_socket = False
 ```
-  
-In the top section (`[Station]`), edit `station_type` to:  
-`station_type = WeatherFlowUDP`
 
-### Replace [[sensor_map]]
-
-- Discard [[sensor_map]] contents.
-- Follow https://github.com/captain-coredump/weatherflow-udp/blob/master/sample_Tempest_sensor_map
-- Insert [[sensor_map]] contents from `sample_Tempest_sensor_map`, or from below:
-```
- # This section is for the TEMPEST WeatherFlow Bridge packets, via UDP broadcast on local subnet
-
-    [[sensor_map]]
-        outTemp = air_temperature.ST-00000025.obs_st
-        outHumidity = relative_humidity.ST-00000025.obs_st
-        pressure = station_pressure.ST-00000025.obs_st
-        #lightning_strikes =  lightning_strike_count.ST-00000025.obs_st
-        #avg_distance =  lightning_strike_avg_distance.ST-00000025.obs_st
-        outTempBatteryStatus = battery.ST-00000025.obs_st
-        windSpeed = wind_speed.ST-00000025.rapid_wind
-        windDir = wind_direction.ST-00000025.rapid_wind
-        #luxXXX = illuminance.ST-00000025.obs_st
-        UV = uv.ST-00000025.obs_st
-        rain = rain_accumulated.ST-00000025.obs_st
-        windBatteryStatus = battery.ST-00000025.obs_st
-        radiation = solar_radiation.ST-00000025.obs_st
-        #lightningXXX = distance.ST-00000025.evt_strike
-        #lightningYYY = energy.ST-00000025.evt_strike
-```
-
+### [[Station]]
+In the (`[Station]`) section near the top of the configuration file, edit:  
+```station_type = WeatherFlowUDP```
 
 ### Get Your Station Identification
 The sample code is for data coming from station ID `ST-00000025`. You now need to find out *your* station ID.
@@ -219,8 +187,10 @@ May 26 22:28:26 raspberrypiZ2-2 weewxd: weatherflowudp: MainThread: raw packet: 
  (I have slightly obfuscated the serial numbers from my own Weatherflow Tempest).
   
  Terminate the log viewing with Ctl-C.
+ 
+ ---
   
- ### Insert your Serial number into weewx.conf
+ ## Insert your Serial number into weewx.conf
   
  - We want the Tempest serial number (here: ST-000520000) in the sensor map code:  
   In /etc/weewx/weewx.conf, search/replace ST-00000025, and replace with ST-00052000 (but with what you found in your log file)
@@ -228,7 +198,7 @@ May 26 22:28:26 raspberrypiZ2-2 weewxd: weatherflowudp: MainThread: raw packet: 
   `sudo /etc/init.d/weewx restart`
  - Let run for 10 - 15 minutes (or more).
   
- ### View web pages
+### View web pages
 *weewx* has main ouput in web pages at: `/var/www/html/weewx`. To see if *weewx* is working for you, view the index.html file.  
 `vim /var/www/html/weewx/index.html`
 
@@ -338,5 +308,4 @@ Cure: I turned off wireless and used ethernet-to-usb. The data reception was roc
 This is a "pending notes" area. These notes will eventually be added into the main body, or discarded.
 
 #### TODO
-1. install weatherunderground, AWEKAS, etc.
-2. Add references.
+1. Install Weather Underground, AWEKAS, etc.
