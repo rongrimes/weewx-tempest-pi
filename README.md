@@ -39,7 +39,7 @@ This document is being written as I convert the station from the _Pi 4_ to _Pi Z
 ## Raspberry PiOS
 
 I am using:<br/>
-![Raspberrpi Lite (64-bit)](RPi64Lite.png)
+![Raspberrpi Lite (64-bit)](images/RPi64Lite.png)
 
 ### Installation
 - Install onto an SD card as usual (I use _rpi_imager_)
