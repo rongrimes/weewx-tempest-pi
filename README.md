@@ -14,19 +14,19 @@ June 2022
 
 ---
 
-
-I have the following hardware:
+## Hardware Pieces
+I have the following equipment:
 
 | Weatherflow Tempest | Raspberry Pi Zero 2 W |
 |---|---|
 | <img src="https://cdn.shopify.com/s/files/1/0012/8512/8294/products/Tempest_Hub_Mount_shopify-amazon-2020_1024x1024@2x.png" width="200"> | <img src="https://assets.raspberrypi.com/static/51035ec4c2f8f630b3d26c32e90c93f1/2b8d7/zero2-hero.webp" width="200"> |
 
-... with a goal to integrate and broadcast over public weather networks:
+... and have the goal to integrate and broadcast my weather data over public weather networks:
 * **Weatherflow Tempest Reporting**
 * **Weather Underground**
+* **My own website** with **weewx links**
 * **AWEKAS**
 * **Weather Cloud**
-* **weewx Weather reporting**
 * **WOW**
 
 ### Full disclosure 😀  
@@ -46,7 +46,7 @@ I am using:<br/>
 - Install SD card into the Pi Zero and start up as usual.
 - Configure _ssh_ to run for remote access.
 
-#### Other software load
+### Other software load
 I use `vim` for editing and show it below; any other text editor is just as suitable. Here is the installation command for reference:
 ```
 sudo apt install vim
@@ -94,15 +94,17 @@ On the Weewx Installation page, follow the topics:
 ## Install Weather Flow Tempest module
 
 ### Retrieve weatherflow UDP code
-- Visit https://github.com/captain-coredump/weatherflow-udp
-- Download the .ZIP download of the project from the GitHub web interface
-  - Button: `CODE`
-  - Choose `Download ZIP`
+1. Visit https://github.com/captain-coredump/weatherflow-udp
+1. Download the .ZIP download of the project from the GitHub web interface
+   1. Button: `CODE`
+   1. Choose `Download ZIP`
 
 This retrieves: `weatherflow-udp-master.zip`
 
 ### Install
-- `sudo wee_extension --install weatherflow-udp-master.zip`
+```
+sudo wee_extension --install weatherflow-udp-master.zip
+```
 
 ---
 
@@ -120,8 +122,8 @@ In the `[Station]` section near the top of the configuration file, edit:
 ```
 
 ### Replace [Simulator] section with [WeatherFlowUDP] content
-- Find the section `[Simulator]`, and delete / comment out all lines in the section, including `[Simulator]`.
-- Copy the following lines to where `[Simulator]` was previously:
+1. Find the section `[Simulator]`, and delete / comment out all lines in the section, including `[Simulator]`.
+1. Copy the following lines to where `[Simulator]` was previously:
 
 ```
 [WeatherFlowUDP]
@@ -197,12 +199,12 @@ ref: https://github.com/captain-coredump/weatherflow-udp/blob/master/sample_Temp
 ### Get Your Station Identification
 The sample code is for data coming from station ID `ST-00000025`. You now need to find out *your* station ID.
   
-- Under `[WeatherFlowUDP]` set:
+1. Under `[WeatherFlowUDP]` set:  
 ```
     log_raw_packets = True
 ```
-- Save the configuration file (`weewx.conf`).
-- Restart weewx.  
+2. Save the configuration file (`weewx.conf`).
+1. Restart weewx.  
   `sudo /etc/init.d/weewx restart`
   
 *weewx* will start watching for the UDP packets from the Tempest and dump them in the log. We can see this information with:
@@ -262,9 +264,9 @@ What's notable here is:
 ### Turn off Station Identification
 When you are satisfied that *weewx* is getting the UDP packets from the Tempest hub, you will want to turn off `log_raw_packets` since it will put lots of now unnecessary stuff in the system log. Edit the configuration file (`weewx.conf`).
   
-- Set `log_raw_packets = False`
-- Save the configuration file.
-- Restart weewx.  
+1. Set `log_raw_packets = False`
+1. Save the configuration file.
+1. Restart weewx.  
   `sudo /etc/init.d/weewx restart`
 
 ---
@@ -341,21 +343,21 @@ There are two ways to get your Tempest weather data published to Weather Undergr
 1. Direct the Tempest website to publish to Weather Underground. This is the method I use.
 1. The *weewx* configuration file can be set up to send data to Weather Underground. See the section in the configuration file: `[[Wunderground]]` 
 
-#### Steps - Weather Underground
+#### Steps: Weather Underground
 1. Navigate to `www.weatherunderground.com`
 1. Login to the site. (Use **Join** if you're a new member.)
 1. In **My Profile**, go to **My Devices**.
 1. Use **Add New Device** and provide data as prompted.
 1. From the *Devices* page, record your **ID** and **Key**.
 
-#### Steps - Tempest Website
+#### Steps: Tempest Website
 1. Go to `https://tempestwx.com/` and login with the same username & password that you created for the mobile app.
 1. Navigate: **Settings > Stations > (Your station) > Public Data > Weather Underground**
-1. Enter your *Station ID* and *Station Key* from above, and enable **Send Rain** data.
+1. Enter your *Station ID* and *Station Key* for Weather Underground from above, and enable the **Send Rain** switch.
 1. Click **<** at the top of the page to exit.
 1. Check Weather Underground in a day or so to see that it's publishing.
 
-I found that Weather Underground took a while to show my station on the map, but I could find my data explicitly via **My Profile > My Devices**
+I found that Weather Underground took a while to show my station on the map, but I could find my data explicitly on the Weather Underground web site via **My Profile > My Devices**.
 
 ---
 
