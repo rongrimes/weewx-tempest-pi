@@ -8,7 +8,7 @@ This document describes setting up [*weewx*](https://weewx.com/) to process the 
 
 However, there is not a straightforward cookbook approach to setting up *weewx* with a Weatherflow Tempest; hence this document. I hope it helps someone.
 
-This document assumes basic knowleddege of a Raspberry Pi and of Linux. If this does not describe you and you want a more detailed approach let me know. I (may, will) add more details in relevant places.
+This document assumes basic knowledge of a Raspberry Pi and of Linux. If this does not describe you and you want a more detailed approach let me know. I (may, will) add more details in relevant places.
 
 June 2022
 
@@ -30,9 +30,9 @@ I have the following hardware:
 * **WOW**
 
 ### Full disclosure 😀  
-I have had the _Weatherflow Tempest_ running with _weewx_ software on a _Raspberry Pi 4 2 GB_ platform since July 2021. Now, I think that a better $ value is to have _weewx_ running on a _Pi Zero 2_. This document is being written as I achieve the transfer.
+I have had the _Weatherflow Tempest_ running with _weewx_ software on a _Raspberry Pi 4 2 GB_ platform since July 2021. Now, I think that a better $ value is to have _weewx_ running on a _Pi Zero 2_. This document is/was  written as I complete(d) the transfer.
 
-See further comments on the transfer at the end.
+See further comments on ***Transfer from a Raspberry Pi 4*** at the end.
 
 ---
 
@@ -379,7 +379,9 @@ I found that Weather Underground took a while to show my station on the map, but
 ## Implementation Notes
 ### Transfer from a Raspberry Pi 4 2GB to a Raspberry Pi Zero 2
 
-The essentials of the transfer were particularly easy. I loaded a new *weewx* on the Pi Zero using the directions above. To transfer:
+As mentioned above, this document was written when I transferred the *weewx* software from a Raspberry Pi 4 2GB to a Raspberry Pi Zero 2.
+
+The essentials of the transfer were particularly easy. I loaded a new *weewx* on the Pi Zero using the directions above and then to transfer the data across:
 1. Stop *weewx* on the Raspberry Pi 4, and the Raspberry Zero 2.  
 ```   sudo /etc/init.d/weewx stop```  
 1. Copy `/var/lib/weewx/weewx.sdb` from the Pi 4 to Pi Zero 2.
@@ -390,9 +392,9 @@ The FTP to web server module picked up immediately and transferred web pages on 
 
 ### Network Connection: Wireless > Ethernet
 
-I found the wireless connection got faulty after a few days. The symptom being that *weewx* would lose data and show temperature (and other readings) as **N/A** with  the daily graphs being dots instead of continuous lines.
+I found the wireless connection got faulty after a few days. The symptom being that *weewx* would lose data and frequently show temperature (and other readings) as **N/A** with  the daily graphs being dots instead of continuous lines.
 
-**Cure:** I turned off wireless and used ethernet-to-usb. The data reception was rock solid from then on.
+**Cure:** I turned off wireless in the Raspberry Pi Zero 2 and used ethernet-to-usb. The data reception was rock solid from then on.
 
 ---
 ---
