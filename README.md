@@ -323,6 +323,27 @@ passive = 1
 ## Additional reporting sites
 
 ### Weather Underground
+There are two ways to get your Tempest weather data published to Weather Underground.
+1. Direct the Tempest website to publish to Weather Underground. This is the method I use.
+1. The *weewx* configuration file can be set up to send data to Weather Underground. See the section in the configuration file: `[[Wunderground]]` 
+
+#### Steps - Weather Underground
+1. Navigate to `www.weatherunderground.com`
+1. Login to the site. (Use **Join** if you're a new member.)
+1. In **My Profile**, go to **My Devices**.
+1. Use **Add New Device** and provide data as prompted.
+1. From the *Devices* page, record your **ID** and **Key**.
+
+#### Steps - Tempest Website
+1. Go to `https://tempestwx.com/` and login with the same username & password that you created for the mobile app.
+1. Navigate: **Settings > Stations > (Your station) > Public Data > Weather Underground**
+1. Enter your *Station ID* and *Station Key* from above, and enable **Send Rain** data.
+1. Click **<** at the top of the page to exit.
+1. Check Weather Underground in a day or so to see that it's publishing.
+
+I found that Weather Underground took a while to show my station on the map, but I could find my data explicitly via **My Profile > My Devices**
+
+---
 
 ### AWEKAS
 
