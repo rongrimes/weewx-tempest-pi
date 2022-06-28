@@ -32,7 +32,7 @@ I have the following hardware:
 ### Full disclosure 😀  
 I have had the _Weatherflow Tempest_ running with _weewx_ software on a _Raspberry Pi 4 2 GB_ platform since July 2021. Now, I think that a better $ value is to have _weewx_ running on a _Pi Zero 2_. This document is/was  written as I complete(d) the transfer.
 
-See further comments on ***Transfer from a Raspberry Pi 4*** at the end.
+See further comments in [Transfer from a Raspberry Pi 4](#transfer-from-a-raspberry-pi-4-2gb-to-a-raspberry-pi-zero-2).
 
 ---
 
