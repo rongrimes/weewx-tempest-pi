@@ -190,7 +190,7 @@ Replace the sensor_map section with the following content:
         #lightningXXX = distance.ST-00000025.evt_strike
         #lightningYYY = energy.ST-00000025.evt_strike
 ```
-ref: `https://github.com/captain-coredump/weatherflow-udp/blob/master/sample_Tempest_sensor_map`.
+ref: https://github.com/captain-coredump/weatherflow-udp/blob/master/sample_Tempest_sensor_map.
 
 ---
 
@@ -223,11 +223,12 @@ May 26 22:28:26 raspberrypiZ2-2 weewxd: weatherflowudp: MainThread: raw packet: 
   
  ## Insert your Serial number into weewx.conf
   
- - We want the Tempest serial number (here: ST-00052000) in the sensor map code:  
+ 1. We want the Tempest serial number (here: ST-00052000) in the sensor map code:  
   In /etc/weewx/weewx.conf, search/replace **ST-00000025** with **ST-00052000** (but with what you found in your log file)
- - Restart weewx.  
+ 1. I also uncommented all lines in [[sensor_map]]. Not sure what effect this has.
+ 1. Restart weewx.  
   `sudo /etc/init.d/weewx restart`
- - Let run for 10 - 15 minutes (or more).
+ 1. Let run for 10 - 15 minutes (or more).
   
 ### View web pages
 *weewx* has main ouput in web pages at: `/var/www/html/weewx`. To see if *weewx* is working for you, view the web `index.html` file.  
@@ -276,7 +277,7 @@ The default measurement units for *StdReport* appear in `/etc/weewx/weewx.conf` 
 
 1. In `/etc/weewx/weewx.conf`, navigate to: **StdReport** >> **Defaults**
 1. Set `unit_system = metric`
-1. Navigate a few lines down to **Units** >> **Groups**, and edit the respective lines to read:
+1. Navigate a few lines down to **Units** >> **Groups**, and edit the respective lines to read:  
 ```
     group_pressure  = kPa          # Options are 'inHg', 'mmHg', 'mbar', 'hPa', or 'kPa'
     group_rain      = mm           # Options are 'inch', 'cm', or 'mm'
@@ -288,7 +289,16 @@ sudo /etc/init.d/weewx restart
 ```
 ---
 
-### Output to web site using FTP
+---
+## Seeing Results
+
+### Your Tempest Website
+
+...
+
+---
+
+### Output to a web site using FTP
 
 I use <a href="https://www.infinityfree.net/" target="_blank">Infinity Free</a> as a web hosting site. It's:
 * free
@@ -320,7 +330,11 @@ passive = 1
 
 ---
 
-## Additional reporting sites
+### weeWX Map
+
+...
+
+---
 
 ### Weather Underground
 There are two ways to get your Tempest weather data published to Weather Underground.
@@ -347,20 +361,30 @@ I found that Weather Underground took a while to show my station on the map, but
 
 ### AWEKAS
 
-### Weather Cloud, etc
+...
 
 ---
 
+### Weather Cloud
+
+...
+
+---
+
+### WOW
+...
+
+---
+---
 ## Implementation Notes
 ### Transfer from a Raspberry Pi 4 2GB to a Raspberry Pi Zero 2
 
 The essentials of the transfer were particularly easy. I loaded a new *weewx* on the Pi Zero using the directions above. To transfer:
-1. Stop *weewx* on Raspberry Pi 4, and Raspberry
-Zero 2.  
+1. Stop *weewx* on the Raspberry Pi 4, and the Raspberry Zero 2.  
 ```   sudo /etc/init.d/weewx stop```  
-1. Copy /var/lib/weewx/weewx.sdb from the Pi 4 to Pi Zero 2.
+1. Copy `/var/lib/weewx/weewx.sdb` from the Pi 4 to Pi Zero 2.
 1. Start *weewv* on the Pi Zero 2. 
-The web transfer picked up immediately and started displaying web pages on the next 5 minute boundary.
+The FTP to web server module picked up immediately and transferred web pages on the next 5 minute boundary.
 
 ---
 
@@ -368,15 +392,14 @@ The web transfer picked up immediately and started displaying web pages on the n
 
 I found the wireless connection got faulty after a few days. The symptom being that *weewx* would lose data and show temperature (and other readings) as **N/A** with  the daily graphs being dots instead of continuous lines.
 
-Cure: I turned off wireless and used ethernet-to-usb. The data reception was rock solid from then on.
+**Cure:** I turned off wireless and used ethernet-to-usb. The data reception was rock solid from then on.
 
 ---
-
 ---
 
 ## My Scratch area
 This is a "pending notes" area. These notes will eventually be added into the main body, or discarded.
 
 #### TODO
-1. Install Weather Underground, AWEKAS, etc.
-2. Edit _templates_
+1. Install Tempest, weeWX, AWEKAS, WeatherCloud, WOW site definition.
+2. Install _templates_
