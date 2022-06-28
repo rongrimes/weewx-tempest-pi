@@ -30,9 +30,9 @@ I have the following hardware:
 * **WOW**
 
 ### Full disclosure 😀  
-I have had the _Weatherflow Tempest_ running with _weewx_ software on a _Raspberry Pi 4 2 GB_ platform xince July 2021. Now, I think that a better $ value is to have _weewx_ running on a _Pi Zero 2_. 
+I have had the _Weatherflow Tempest_ running with _weewx_ software on a _Raspberry Pi 4 2 GB_ platform since July 2021. Now, I think that a better $ value is to have _weewx_ running on a _Pi Zero 2_. This document is being written as I achieve the transfer.
 
-This document is being written as I convert the station from the _Pi 4_ to _Pi Zero 2_. Since I am converting from an existing system, I may leave a few bits out. If they are annoying, or the document could be improved, please let me know. If otherwise, then, just: Sorry!
+See further comments on the transfer at the end.
 
 ---
 
@@ -331,6 +331,18 @@ passive = 1
 ---
 
 ## Implementation Notes
+### Transfer from a Raspberry Pi 4 2GB to a Raspberry Pi Zero 2
+
+The essentials of the transfer were particularly easy. I loaded a new *weewx* on the Pi Zero using the directions above. To transfer:
+1. Stop *weewx* on Raspberry Pi 4, and Raspberry
+Zero 2.  
+```   sudo /etc/init.d/weewx stop```  
+1. Copy /var/lib/weewx/weewx.sdb from the Pi 4 to Pi Zero 2.
+1. Start *weewv* on the Pi Zero 2. 
+The web transfer picked up immediately and started displaying web pages on the next 5 minute boundary.
+
+---
+
 ### Network Connection: Wireless > Ethernet
 
 I found the wireless connection got faulty after a few days. The symptom being that *weewx* would lose data and show temperature (and other readings) as **N/A** with  the daily graphs being dots instead of continuous lines.
