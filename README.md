@@ -312,7 +312,7 @@ The default measurement units for *StdReport* appear in `/etc/weewx/weewx.conf` 
 
 ### Your Tempest Website
 
-On your phone or tablet in the Tempest configuration app, you specify if you want to share your results publicly.
+On your phone or tablet and in the Tempest configuration app, you specify if you want to share your results publicly.
 ```
     Settings > Stations > (Station name) > Public Data > Share Publicly
 ```
@@ -402,7 +402,31 @@ I found that Weather Underground took a while to show my station on the map, but
 
 ### AWEKAS
 
-...
+AWEKAS (Automatisches WEtterKArten System) is an Austrian weather station collecting site with a strong European presence. It is similar in principle to WeatherUndergound in North America.
+* <a href="https://www.awekas.at/en/map.php" target="_blank">https://www.awekas.at/en/map.php</a>
+
+To get your results displayed with AWEKAS:
+1. On the AWEKAS page, navigate to:  
+`My Awekas > My Station Panel`
+1. Use `Register New`, and supply details as required.
+1. Update the WeeWX configuration file with your login information.
+1. For illustration, I have:
+```
+    [[AWEKAS]]
+        # This section is for configuring posts to AWEKAS.
+        
+        # If you wish to do this, set the option 'enable' to true,
+        # and specify a username and password.
+        # To guard against parsing errors, put the password in quotes.
+        enable = true
+        username = redacted
+        password = redacted
+```
+5. Save the configuration file. 
+1. Restart *weewx*.
+```
+    sudo /etc/init.d/weewx restart
+```
 
 ---
 
