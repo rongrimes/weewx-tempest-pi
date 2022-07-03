@@ -8,7 +8,7 @@ This document describes setting up [WeeWX](https://weewx.com/) to process the re
 
 However, there is not a straightforward cookbook approach to setting up WeeWX with a WeatherFlow Tempest; hence this document. I hope it helps someone.
 
-This document assumes basic knowledge of a Raspberry Pi and of Linux. If this does not describe you and you want a more detailed approach let me know. I (may, will) add more details in relevant places.
+This document assumes basic knowledge of Linux and a Raspberry Pi if you're using one. If this does not describe you and you want a more detailed approach let me know. I (may, will) add more details in relevant places.
 
 June 2022
 
@@ -36,21 +36,32 @@ See further comments in [Transfer from a Raspberry Pi 4](#transfer-from-a-raspbe
 
 ---
 
-## Raspberry PiOS
+---
+
+## Linux, etc.
+
+### Editing
+When editing the configuration and other files, any text editor will do:
+* vim
+* geany
+* thony
+* etc.
+* ....
+
+---
+
+### Introduction
+
+If you're using Ubuntu, Linux Mint, or other Linux, skip this section and jump to [WeeWX](#weewx) below.
+
+### Installation
 
 I am using:<br/>
 ![Raspberrpi Lite (64-bit)](images/RPi64Lite.png)
 
-### Installation
 - Install onto an SD card as usual (I use _rpi_imager_)
 - Install SD card into the Pi Zero and start up as usual.
 - Configure _ssh_ to run for remote access.
-
-### Other software load
-I use `vim` for editing and show it below; any other text editor is just as suitable. Here is the installation command for reference:
-```
-sudo apt install vim
-```
 
 ### dietpi
 I tried to install _weewx_ with the [**dietpi**](https://dietpi.com/) distro. _weewx_ found all sorts of modules missing and it just wasn't worth the effort to continue. 
@@ -111,9 +122,10 @@ sudo wee_extension --install weatherflow-udp-master.zip
 ### Edit the configuration file: weewx.config
 
 ```
-cd /etc/weewx
-sudo vim weewx.conf
+sudo edit /etc/weewx/weewx.conf
 ```
+
+
 
 ### [[Station]]
 In the `[Station]` section near the top of the configuration file, edit:  
@@ -224,10 +236,12 @@ May 26 22:28:26 raspberrypiZ2-2 weewxd: weatherflowudp: MainThread: raw packet: 
  ---
   
  ## Insert your Serial number into weewx.conf
-  
- 1. We want the Tempest serial number (here: ST-00052000) in the sensor map code:  
+
+ 1. `sudo edit /etc/weewx/weewx.conf` 
+ 2. We want the Tempest serial number (here: ST-00052000) in the sensor map code:  
   In /etc/weewx/weewx.conf, search/replace **ST-00000025** with **ST-00052000** (but with what you found in your log file)
  1. I also uncommented all lines in [[sensor_map]]. Not sure what effect this has.
+ 1. Save the configuration file (`weewx.conf`). 
  1. Restart weewx.  
   `sudo /etc/init.d/weewx restart`
  1. Let run for 10 - 15 minutes (or more).
@@ -264,6 +278,7 @@ What's notable here is:
 ### Turn off Station Identification
 When you are satisfied that *weewx* is getting the UDP packets from the Tempest hub, you will want to turn off `log_raw_packets` since it will put lots of now unnecessary stuff in the system log. Edit the configuration file (`weewx.conf`).
   
+1. `sudo edit /etc/weewx/weewx.conf` 
 1. Set `log_raw_packets = False`
 1. Save the configuration file.
 1. Restart _weewx_.  
@@ -285,9 +300,10 @@ The default measurement units for *StdReport* appear in `/etc/weewx/weewx.conf` 
     group_rain      = mm           # Options are 'inch', 'cm', or 'mm'
     group_rainrate  = mm_per_hour  # Options are 'inch_per_hour', 'cm_per_hour', or 'mm_per_hour'
 ```
-4. Restart *weewx*.
+4. Save the configuration file. 
+1. Restart *weewx*.
 ```
-sudo /etc/init.d/weewx restart
+    sudo /etc/init.d/weewx restart
 ```
 ---
 
@@ -296,7 +312,7 @@ sudo /etc/init.d/weewx restart
 
 ### Your Tempest Website
 
-On your phone or tablet in the configuration app, you specify if you want to share your results publicly.
+On your phone or tablet in the Tempest configuration app, you specify if you want to share your results publicly.
 ```
     Settings > Stations > (Station name) > Public Data > Share Publicly
 ```
@@ -342,7 +358,22 @@ passive = 1
 
 ### WeeWX Map
 
-...
+WeeWX maintains a world map of all registered WeeWX stations at:
+* <a href="http://weewx.com/stations.html" target="_blank">http://weewx.com/stations.html</a>
+
+To register on the map:
+1.  `sudo edit /etc/weewx/weewx.conf`
+1. Navigate to: `[StdRESTful] > [[StationRegistry]]`
+1. Set `register_this_station = true`
+1. Navigate to `station_url` (above in the config file).
+1. Set `station_url` to your Weewx website. Really, set it to any website you have control over.
+1. Save the configuration file. 
+1. Restart *weewx*.
+```
+    sudo /etc/init.d/weewx restart
+```
+
+Check the WeeWX map and your site will appear soon. (I don't remember if it takes 5 minutes, an hour or a day.)
 
 ---
 
@@ -413,5 +444,4 @@ I found the wireless connection got faulty after a few days. The symptom being t
 This is a "pending notes" area. These notes will eventually be added into the main body, or discarded.
 
 #### TODO
-1. Install WeeWX registration, AWEKAS, WeatherCloud, WOW site definition.
-2. Install _templates_
+1. Install AWEKAS, WeatherCloud, WOW site definition.
