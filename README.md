@@ -430,9 +430,32 @@ To get your results displayed with AWEKAS:
 
 ---
 
-### Weather Cloud
+### Weathercloud
 
-...
+Weathercloud is a Barcelona station collecting site with a strong European and North American presence.
+* <a href="https://app.weathercloud.net/map" target="_blank">https://app.weathercloud.net/map</a>
+
+To get your results displayed with Weathercloud:
+1. On the Weathercloud page, navigate to:  
+`Get started`
+1. Use `Sign up`, and supply details as required.
+1. You will receive an email with:
+    * Weathercloud ID  
+    redacted
+    * Key  
+    redacted
+1. Update the WeeWX configuration file with your login information.
+1. For illustration, I have:
+```
+    [[WeatherCloud]]
+        id = redacted
+        key = redacted
+```
+5. Save the configuration file. 
+1. Restart *weewx*.
+```
+    sudo /etc/init.d/weewx restart
+```
 
 ---
 
@@ -468,4 +491,4 @@ I found the wireless connection got faulty after a few days. The symptom being t
 This is a "pending notes" area. These notes will eventually be added into the main body, or discarded.
 
 #### TODO
-1. Install AWEKAS, WeatherCloud, WOW site definition.
+1. Install WeatherCloud, WOW site definition.
