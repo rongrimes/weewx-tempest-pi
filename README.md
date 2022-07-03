@@ -296,9 +296,17 @@ sudo /etc/init.d/weewx restart
 
 ### Your Tempest Website
 
-...
+On your phone or tablet in the configuration app, you specify if you want to share your results publicly.
+```
+    Settings > Stations > (Station name) > Public Data > Share Publicly
+```
+A few lines below is the  **Share Page** with the URL of where your weather results appear:
+```
+    https://tempestwx.com/station/nnnnn
+```
+...where `nnnnn` is your given station number. It is not the same as the serial numbers of the Tempest of the Hub.
 
----
+ ---
 
 ### Output to a web site using FTP
 
