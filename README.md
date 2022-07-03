@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This document describes setting up [*weewx*](https://weewx.com/) to process the results from a [**Weather Flow Tempest**](https://weatherflow.com/tempest-weather-system/) and is derived from:
+This document describes setting up [*weewx*](https://weewx.com/) to process the results from a [**WeatherFlow Tempest**](https://weatherflow.com/tempest-weather-system/) and is derived from:
 * <a href="https://weewx.com/docs.html" target="_blank">WeeWX documentation</a>
 * <a href="https://github.com/captain-coredump/weatherflow-udp" target="_blank">//github.com/captain-coredump/weatherflow-udp</a>
 
-However, there is not a straightforward cookbook approach to setting up *weewx* with a Weatherflow Tempest; hence this document. I hope it helps someone.
+However, there is not a straightforward cookbook approach to setting up *weewx* with a WeatherFlow Tempest; hence this document. I hope it helps someone.
 
 This document assumes basic knowledge of a Raspberry Pi and of Linux. If this does not describe you and you want a more detailed approach let me know. I (may, will) add more details in relevant places.
 
@@ -17,12 +17,12 @@ June 2022
 ## Hardware Pieces
 I have the following equipment:
 
-| Weatherflow Tempest | Raspberry Pi Zero 2 W |
+| WeatherFlow Tempest | Raspberry Pi Zero 2 W |
 |---|---|
 | <img src="https://cdn.shopify.com/s/files/1/0012/8512/8294/products/Tempest_Hub_Mount_shopify-amazon-2020_1024x1024@2x.png" width="200"> | <img src="https://assets.raspberrypi.com/static/51035ec4c2f8f630b3d26c32e90c93f1/2b8d7/zero2-hero.webp" width="200"> |
 
 ... and have the goal to integrate and broadcast my weather data over public weather networks:
-* **Weatherflow Tempest Reporting**
+* **WeatherFlow Tempest Reporting**
 * **Weather Underground**
 * **My own website** with **weewx links**
 * **AWEKAS**
@@ -30,7 +30,7 @@ I have the following equipment:
 * **WOW**
 
 ### Full disclosure 😀  
-I have had the _Weatherflow Tempest_ running with _weewx_ software on a _Raspberry Pi 4 2 GB_ platform since July 2021. Now, I think that a better $ value is to have _weewx_ running on a _Pi Zero 2_. This document is/was  written as I complete(d) the transfer.
+I have had the _WeatherFlow Tempest_ running with _weewx_ software on a _Raspberry Pi 4 2 GB_ platform since July 2021. Now, I think that a better $ value is to have _weewx_ running on a _Pi Zero 2_. This document is/was  written as I complete(d) the transfer.
 
 See further comments in [Transfer from a Raspberry Pi 4](#transfer-from-a-raspberry-pi-4-2gb-to-a-raspberry-pi-zero-2).
 
@@ -91,7 +91,7 @@ On the Weewx Installation page, follow the topics:
 | **Layout** | Keep for reference. |
 
 --- 
-## Install Weather Flow Tempest module
+## Install WeatherFlow Tempest module
 
 ### Retrieve weatherflow UDP code
 1. Visit https://github.com/captain-coredump/weatherflow-udp
