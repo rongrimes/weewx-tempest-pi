@@ -444,7 +444,7 @@ To get your results displayed with Weathercloud:
     redacted
     * Key  
     redacted
-1. Update the WeeWX configuration file with your login information.
+1. Update the WeeWX configuration file with your ID/key information.
 1. For illustration, I have:
 ```
     [[WeatherCloud]]
@@ -460,7 +460,31 @@ To get your results displayed with Weathercloud:
 ---
 
 ### WOW
-...
+WOW is the UK Met Office WeatherObservationsWebsite with a strong Western Europe, Australia/New Zealand and some North American presence.
+* <a href="https://wow.metoffice.gov.uk/" target="_blank">https://wow.metoffice.gov.uk/</a>
+
+To get your results displayed with WOW:
+1. On the WOW page, navigate to:  
+`Get started`
+1. Use `Sign up`, and supply details as required.
+1. (content pending).
+1. For illustration, I have:
+```
+    [[WOW]]
+        # This section is for configuring posts to WOW.
+        
+        # If you wish to do this, set the option 'enable' to true,
+        # and specify a station and password.
+        # To guard against parsing errors, put the password in quotes.
+        enable = true
+        station = redacted
+        password = redacted
+```
+5. Save the configuration file. 
+1. Restart *weewx*.
+```
+    sudo /etc/init.d/weewx restart
+```
 
 ---
 ---
@@ -491,4 +515,4 @@ I found the wireless connection got faulty after a few days. The symptom being t
 This is a "pending notes" area. These notes will eventually be added into the main body, or discarded.
 
 #### TODO
-1. Install WeatherCloud, WOW site definition.
+1. Install WOW site definition.
