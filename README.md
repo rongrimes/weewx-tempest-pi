@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This document describes setting up [*weewx*](https://weewx.com/) to process the results from a [**WeatherFlow Tempest**](https://weatherflow.com/tempest-weather-system/) and is derived from:
+This document describes setting up [WeeWX](https://weewx.com/) to process the results from a [**WeatherFlow Tempest**](https://weatherflow.com/tempest-weather-system/) and is derived from:
 * <a href="https://weewx.com/docs.html" target="_blank">WeeWX documentation</a>
 * <a href="https://github.com/captain-coredump/weatherflow-udp" target="_blank">//github.com/captain-coredump/weatherflow-udp</a>
 
-However, there is not a straightforward cookbook approach to setting up *weewx* with a WeatherFlow Tempest; hence this document. I hope it helps someone.
+However, there is not a straightforward cookbook approach to setting up WeeWX with a WeatherFlow Tempest; hence this document. I hope it helps someone.
 
 This document assumes basic knowledge of a Raspberry Pi and of Linux. If this does not describe you and you want a more detailed approach let me know. I (may, will) add more details in relevant places.
 
@@ -24,13 +24,13 @@ I have the following equipment:
 ... and have the goal to integrate and broadcast my weather data over public weather networks:
 * **WeatherFlow Tempest Reporting**
 * **Weather Underground**
-* **My own website** with **weewx links**
+* **My own website** with **WeeWX links**
 * **AWEKAS**
 * **Weather Cloud**
 * **WOW**
 
 ### Full disclosure 😀  
-I have had the _WeatherFlow Tempest_ running with _weewx_ software on a _Raspberry Pi 4 2 GB_ platform since July 2021. Now, I think that a better $ value is to have _weewx_ running on a _Pi Zero 2_. This document is/was  written as I complete(d) the transfer.
+I have had the _WeatherFlow Tempest_ running with WeeWX software on a _Raspberry Pi 4 2 GB_ platform since July 2021. Now, I think that a better $ value is to have _weewx_ running on a _Pi Zero 2_. This document is/was  written as I complete(d) the transfer.
 
 See further comments in [Transfer from a Raspberry Pi 4](#transfer-from-a-raspberry-pi-4-2gb-to-a-raspberry-pi-zero-2).
 
@@ -57,17 +57,17 @@ I tried to install _weewx_ with the [**dietpi**](https://dietpi.com/) distro. _w
 
 ---
 
-## weewx
+## WeeWX
 
-### Retrieve, Install weewx
+### Retrieve, Install WeeWX
 
 From the WeeWx Documentation, follow the topics:
-- [Configure apt](https://weewx.com/docs/debian.htm#configure_apt) - shows the specifics of retrieving *weewx* with *apt*.
-- [Install](https://weewx.com/docs/debian.htm#Install) *weewx*
+- [Configure apt](https://weewx.com/docs/debian.htm#configure_apt) - shows the specifics of retrieving WeeWX with *apt*.
+- [Install](https://weewx.com/docs/debian.htm#Install) WeeWX
 
 #### Installation Notes
 
-The _weewx_ installation will ask for the following:
+The WeeWX installation will ask for the following:
 
 | Value | Note |
 | --- | --- |
@@ -79,7 +79,7 @@ The _weewx_ installation will ask for the following:
 
 ### Status
 
-On the Weewx Installation page, follow the topics:
+On the WeeWX Installation page, follow the topics:
 
 | Value | Note |
 | --- | --- |
@@ -204,7 +204,7 @@ The sample code is for data coming from station ID `ST-00000025`. You now need t
     log_raw_packets = True
 ```
 2. Save the configuration file (`weewx.conf`).
-1. Restart weewx.  
+1. Restart _weewx_.  
   `sudo /etc/init.d/weewx restart`
   
 *weewx* will start watching for the UDP packets from the Tempest and dump them in the log. We can see this information with:
@@ -233,7 +233,7 @@ May 26 22:28:26 raspberrypiZ2-2 weewxd: weatherflowudp: MainThread: raw packet: 
  1. Let run for 10 - 15 minutes (or more).
   
 ### View web pages
-*weewx* has main ouput in web pages at: `/var/www/html/weewx`. To see if *weewx* is working for you, view the web `index.html` file.  
+WeeWX has main ouput in web pages at: `/var/www/html/weewx`. To see if WeeWX is working for you, view the web `index.html` file.  
 `vim /var/www/html/weewx/index.html`
 
 Browse down and look for output like:
@@ -266,7 +266,7 @@ When you are satisfied that *weewx* is getting the UDP packets from the Tempest 
   
 1. Set `log_raw_packets = False`
 1. Save the configuration file.
-1. Restart weewx.  
+1. Restart _weewx_.  
   `sudo /etc/init.d/weewx restart`
 
 ---
@@ -304,7 +304,7 @@ A few lines below is the  **Share Page** with the URL of where your weather resu
 ```
     https://tempestwx.com/station/nnnnn
 ```
-...where `nnnnn` is your given station number. It is not the same as the serial numbers of the Tempest of the Hub.
+...where _`nnnnn`_ is your given station number. It is not the same as the serial numbers of the Tempest of the Hub.
 
  ---
 
@@ -317,7 +317,7 @@ I use <a href="https://www.infinityfree.net/" target="_blank">Infinity Free</a> 
 
 ... and suits my non-professional purposes.
 
-Use the notes in <a href="https://weewx.com/docs/usersguide.htm#config_FTP" target="_blank">FTP</a> in the *weewx* User's Guide for FTP transfer.
+Use the notes in <a href="https://weewx.com/docs/usersguide.htm#config_FTP" target="_blank">FTP</a> in the WeeWX User's Guide for FTP transfer.
 
 For illustration, I have configured:
 ```
@@ -340,7 +340,7 @@ passive = 1
 
 ---
 
-### weeWX Map
+### WeeWX Map
 
 ...
 
@@ -389,9 +389,9 @@ I found that Weather Underground took a while to show my station on the map, but
 ## Implementation Notes
 ### Transfer from a Raspberry Pi 4 2GB to a Raspberry Pi Zero 2
 
-As mentioned above, this document was written when I transferred the *weewx* software from a Raspberry Pi 4 2GB to a Raspberry Pi Zero 2.
+As mentioned above, this document was written when I transferred the WeeWX software from a Raspberry Pi 4 2GB to a Raspberry Pi Zero 2.
 
-The essentials of the transfer were particularly easy. I loaded a new *weewx* on the Pi Zero using the directions above and then to transfer the data across:
+The essentials of the transfer were particularly easy. I loaded a new WeeWX on the Pi Zero using the directions above and then to transfer the data across:
 1. Stop *weewx* on the Raspberry Pi 4, and the Raspberry Zero 2.  
 ```   sudo /etc/init.d/weewx stop```  
 1. Copy `/var/lib/weewx/weewx.sdb` from the Pi 4 to Pi Zero 2.
@@ -413,5 +413,5 @@ I found the wireless connection got faulty after a few days. The symptom being t
 This is a "pending notes" area. These notes will eventually be added into the main body, or discarded.
 
 #### TODO
-1. Install Tempest, weeWX, AWEKAS, WeatherCloud, WOW site definition.
+1. Install WeeWX registration, AWEKAS, WeatherCloud, WOW site definition.
 2. Install _templates_
