@@ -452,6 +452,7 @@ To get your results displayed with Weathercloud:
         key = redacted
 ```
 5. Save the configuration file. 
+1. Visit https://github.com/matthewwall/weewx-wcloud, and follow the directions to install wcloud - the weewx extension that sends data to WeatherCloud.
 1. Restart *weewx*.
 ```
     sudo /etc/init.d/weewx restart
