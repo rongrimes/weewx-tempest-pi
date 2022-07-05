@@ -468,13 +468,14 @@ To get your results displayed with WOW:
 1. On the WOW page, navigate to:  
 `Get started`
 1. Use `Sign up`, and supply details as required.
-1. (content pending).
-1. For illustration, I have:
+1. Create a Site and supply the information to configure your entry on WOW.
+1. The Configuration screen will ask for "Site Name". This is the value you enter for "station" in *weewx.conf*.
+1. Click Complete on the web page to register your site.
+1. In *weewx.conf*, update the [[WOW]] section with your WOW credentials. For illustration, I have:
 ```
     [[WOW]]
         # This section is for configuring posts to WOW.
         
-        # If you wish to do this, set the option 'enable' to true,
         # and specify a station and password.
         # To guard against parsing errors, put the password in quotes.
         enable = true
