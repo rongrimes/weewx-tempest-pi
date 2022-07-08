@@ -479,9 +479,10 @@ To get your weather results displayed with WOW:
 
 1. Click **Complete** on the web page to register your site.
 1. Review your site (you can find it under **My sites**).
-1. The coded value under your station name, is the **station** value for the WeeWX config file.<br/>Example:  
+1. The coded value under your station name, is the **station** value for the WeeWX config file.<br/>Example:<br/>
 <img src="./images/WOWstation.png">
-1. In *weewx.conf*, update the [[WOW]] section with your WOW credentials. For illustration, I have:
+
+1. In *weewx.conf*, update the [[WOW]] section with your WOW credentials. For illustration, I have:  
 ```
     [[WOW]]
         # This section is for configuring posts to WOW.
