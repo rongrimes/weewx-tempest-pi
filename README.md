@@ -19,7 +19,8 @@ I have the following equipment:
 
 | WeatherFlow Tempest | Raspberry Pi Zero 2 W |
 |---|---|
-| <img src="https://cdn.shopify.com/s/files/1/0012/8512/8294/products/Tempest_Hub_Mount_shopify-amazon-2020_1024x1024@2x.png" width="200"> | <img src="https://assets.raspberrypi.com/static/51035ec4c2f8f630b3d26c32e90c93f1/2b8d7/zero2-hero.webp" width="200"> |
+| <a src="https://cdn.shopify.com/s/files/1/0012/8512/8294/products/Tempest_Hub_Mount_shopify-amazon-2020_1024x1024@2x.png" target="_blank">(image reference)</a> | <a href="https://assets.raspberrypi.com/static/51035ec4c2f8f630b3d26c32e90c93f1/2b8d7/zero2-hero.webp" target="_blank">(image reference)</a> |
+| <img src="./images/WOWTempest_Hub.png" width="200"> | <img src="./images/pizero2-hero.png" width="200"> |
 
 ... and have the goal to integrate and broadcast my weather data over public weather networks:
 * **WeatherFlow Tempest Reporting**
@@ -405,7 +406,7 @@ I found that Weather Underground took a while to show my station on the map, but
 AWEKAS (Automatisches WEtterKArten System) is an Austrian weather station collecting site with a strong European presence. It is similar in principle to WeatherUndergound in North America.
 * <a href="https://www.awekas.at/en/map.php" target="_blank">https://www.awekas.at/en/map.php</a>
 
-To get your results displayed with AWEKAS:
+To get your weather results displayed with AWEKAS:
 1. On the AWEKAS page, navigate to:  
 `My Awekas > My Station Panel`
 1. Use `Register New`, and supply details as required.
@@ -435,7 +436,7 @@ To get your results displayed with AWEKAS:
 Weathercloud is a Barcelona station collecting site with a strong European and North American presence.
 * <a href="https://app.weathercloud.net/map" target="_blank">https://app.weathercloud.net/map</a>
 
-To get your results displayed with Weathercloud:
+To get your weather results displayed with Weathercloud:
 1. On the Weathercloud page, navigate to:  
 `Get started`
 1. Use `Sign up`, and supply details as required.
@@ -464,29 +465,50 @@ To get your results displayed with Weathercloud:
 WOW is the UK Met Office WeatherObservationsWebsite with a strong Western Europe, Australia/New Zealand and some North American presence.
 * <a href="https://wow.metoffice.gov.uk/" target="_blank">https://wow.metoffice.gov.uk/</a>
 
-To get your results displayed with WOW:
-1. On the WOW page, navigate to:  
-`Get started`
-1. Use `Sign up`, and supply details as required.
-1. Create a Site and supply the information to configure your entry on WOW.
-1. The Configuration screen will ask for "Site Name". This is the value you enter for "station" in *weewx.conf*.
-1. Click Complete on the web page to register your site.
+I found this site more difficult/less intuitive to set up, and hence a few more notes here regarding configuration. In your WeeWX config file you are asked for two values:
+* station
+* password
+
+The notes below will help you find these (it's not obvious until you know!).
+
+To get your weather results displayed with WOW:
+1. On the WOW page, use `Sign up`, and supply details as required.
+1. Use **Create a Site** and supply the information to configure your station entry on WOW.
+1. For *Step 1: Configuration* screen in *(2) Site Details*, it will ask for "Authentication Key". Use any value here (but avoid spaces, and "some" special characters), and this will be your WeeWX password value.<br/>Example:  
+<img src="./images/WOWauthentication.png">
+
+1. Click **Complete** on the web page to register your site.
+1. Review your site (you can find it under **My sites**).
+1. The coded value under your station name, is the **station** value for the WeeWX config file.<br/>Example:  
+<img src="./images/WOWstation.png">
 1. In *weewx.conf*, update the [[WOW]] section with your WOW credentials. For illustration, I have:
 ```
     [[WOW]]
         # This section is for configuring posts to WOW.
         
-        # and specify a station and password.
-        # To guard against parsing errors, put the password in quotes.
+        # If you wish to post to WOW, set the option 'enable' to true, then specify a station and
+        # password. To guard against parsing errors, put the password in quotes.
+        # >> Example values to match images.
         enable = true
-        station = redacted
-        password = redacted
+        station = "3251462c-74fc-ec11-b5cf-0003ffffffff"
+        password = "EvilPlace"
 ```
 5. Save the configuration file. 
 1. Restart *weewx*.
+
 ```
     sudo /etc/init.d/weewx restart
 ```
+
+#### WOW Site Data Preferences
+The WOW Site registration page uses the **4. Site Data Preferences** section to describe the realistic accuracy of your station. This section was horribly cryptic until I found the section description in the *Support Pages*:  
+&nbsp;&nbsp;&nbsp;<a href="https://wow.metoffice.gov.uk/support/siteratings" target="_blank">Support > Site Ratings</a>
+
+#### Debugging the link
+I found some help in debugging the upload process in:  
+&nbsp;&nbsp;&nbsp;<a href="https://wow.metoffice.gov.uk/support/siteratings" target="_blank">Support > Data Formats and APIs</a>
+
+In particular, I found that using the **Example URL** meant that instead of working with WeeWx to communicate to WOW which could take 5 minutes per cycle, I could instead, manually send REST requests off to WOW at any speed. This way I finally got the *station* (= *siteid*) and *password* (= *Authentication Key* = *siteAuthenticationKey*) correct.
 
 ---
 ---
@@ -517,4 +539,4 @@ I found the wireless connection got faulty after a few days. The symptom being t
 This is a "pending notes" area. These notes will eventually be added into the main body, or discarded.
 
 #### TODO
-1. Install WOW site definition.
+1. Install PWSWeather site definition.
