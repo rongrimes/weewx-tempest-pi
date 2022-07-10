@@ -431,6 +431,35 @@ To get your weather results displayed with AWEKAS:
 
 ---
 
+### PWS Weather
+
+Weathercloud is a Minnesota (US) station collecting site with fairly repeasentative presence worldwide.
+* <a href="https://www.pwsweather.com/map/" target="_blank">https://www.pwsweather.com/map/</a>
+
+To get your weather results displayed with PWS Weather:
+1. On the PWS Weather web page, use `Log in`, and create your login ID.
+1. Click the button to `Add a station`. If you don't see `Add a station`, log out and log back in again.
+1. Provide your station details and then click `SAVED STATION`.
+1. Click your station button on the **Stations** web page and retrieve:
+   * your `Station ID`
+   * your `API Key`.
+1. Update the [[PWSweather]] section in the WeeWX configuration file with your station information. (Use your `API Key` for the password).  
+1. For illustration, I have:
+```
+    [[PWSweather]]
+        enable = true
+        station = EASTTORONTO
+        password = 218_redacted
+```
+7. Save the configuration file. 
+1. Restart *weewx*.
+```
+    sudo /etc/init.d/weewx restart
+```
+
+---
+
+
 ### Weathercloud
 
 Weathercloud is a Barcelona station collecting site with a strong European and North American presence.
