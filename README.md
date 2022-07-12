@@ -6,11 +6,20 @@ This document describes setting up [WeeWX](https://weewx.com/) to process the re
 * <a href="https://weewx.com/docs.html" target="_blank">WeeWX documentation</a>
 * <a href="https://github.com/captain-coredump/weatherflow-udp" target="_blank">//github.com/captain-coredump/weatherflow-udp</a>
 
-However, there is not a straightforward cookbook approach to setting up WeeWX with a WeatherFlow Tempest; hence this document. I hope it helps someone.
+There is not a straightforward cookbook approach to setting up WeeWX with a WeatherFlow Tempest; hence this document. I hope it helps someone.
 
 This document assumes basic knowledge of Linux and a Raspberry Pi if you're using one. If this does not describe you and you want a more detailed approach let me know. I (may, will) add more details in relevant places.
 
-June 2022
+Also, there are introductory notes to show how to publish weather results to:
+* [WeatherFlow Tempest](#your-tempest-website)
+* [AWEKAS](#awekas)
+* [PWS Weather](#pws-weather)
+* [Weather Underground](#weather-underground)
+* [Weathercloud](#weathercloud)
+* [WeeWX](#output-to-a-web-site-using-ftp)
+* [UK Met Office WOW](#wow)
+
+July 2022
 
 ---
 
@@ -22,13 +31,7 @@ I have the following equipment:
 | <a src="https://cdn.shopify.com/s/files/1/0012/8512/8294/products/Tempest_Hub_Mount_shopify-amazon-2020_1024x1024@2x.png" target="_blank">(image reference)</a> | <a href="https://assets.raspberrypi.com/static/51035ec4c2f8f630b3d26c32e90c93f1/2b8d7/zero2-hero.webp" target="_blank">(image reference)</a> |
 | <img src="./images/WOWTempest_Hub.png" width="200"> | <img src="./images/pizero2-hero.png" width="200"> |
 
-... and have the goal to integrate and broadcast my weather data over public weather networks:
-* **WeatherFlow Tempest Reporting**
-* **Weather Underground**
-* **My own website** with **WeeWX links**
-* **AWEKAS**
-* **Weather Cloud**
-* **WOW**
+
 
 ### Full disclosure 😀  
 I have had the _WeatherFlow Tempest_ running with WeeWX software on a _Raspberry Pi 4 2 GB_ platform since July 2021. Now, I think that a better $ value is to have _weewx_ running on a _Pi Zero 2_. This document is/was  written as I complete(d) the transfer.
@@ -45,8 +48,7 @@ See further comments in [Transfer from a Raspberry Pi 4](#transfer-from-a-raspbe
 When editing the configuration and other files, any text editor will do:
 * vim
 * geany
-* thony
-* etc.
+* thonny
 * ....
 
 ---
@@ -561,12 +563,3 @@ The FTP to web server module picked up immediately and transferred web pages on 
 I found the wireless connection got faulty after a few days. The symptom being that *weewx* would lose data and frequently show temperature (and other readings) as **N/A** with  the daily graphs being dots instead of continuous lines.
 
 **Cure:** I turned off wireless in the Raspberry Pi Zero 2 and used ethernet-to-usb. The data reception was rock solid from then on.
-
----
----
-
-## My Scratch area
-This is a "pending notes" area. These notes will eventually be added into the main body, or discarded.
-
-#### TODO
-1. Install PWSWeather site definition.
