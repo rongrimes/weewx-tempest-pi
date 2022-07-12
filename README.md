@@ -11,13 +11,13 @@ There is not a straightforward cookbook approach to setting up WeeWX with a Weat
 This document assumes basic knowledge of Linux and a Raspberry Pi if you're using one. If this does not describe you and you want a more detailed approach let me know. I (may, will) add more details in relevant places.
 
 Also, there are introductory notes to show how to publish weather results to:
-* [WeatherFlow Tempest](#your-tempest-website)
+* [WeatherFlow Tempest Website](#weatherflow-tempest-website)
 * [AWEKAS](#awekas)
 * [PWS Weather](#pws-weather)
 * [Weather Underground](#weather-underground)
 * [Weathercloud](#weathercloud)
-* [WeeWX](#output-to-a-web-site-using-ftp)
-* [UK Met Office WOW](#wow)
+* [WeeWX](#weewx-output-using-ftp)
+* [WOW](#wow)
 
 July 2022
 
@@ -313,7 +313,7 @@ The default measurement units for *StdReport* appear in `/etc/weewx/weewx.conf` 
 ---
 ## Seeing Results
 
-### Your Tempest Website
+### WeatherFlow Tempest Website
 
 On your phone or tablet and in the Tempest configuration app, you specify if you want to share your results publicly.
 ```
@@ -327,7 +327,7 @@ A few lines below is the  **Share Page** with the URL of where your weather resu
 
  ---
 
-### Output to a web site using FTP
+### WeeWX Output using FTP
 
 I use <a href="https://www.infinityfree.net/" target="_blank">Infinity Free</a> as a web hosting site. It's:
 * free
