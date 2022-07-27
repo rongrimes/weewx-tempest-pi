@@ -51,7 +51,7 @@ This document describes setting up [WeeWX](https://weewx.com/) to process the re
 * <a href="https://weewx.com/docs.html" target="_blank">WeeWX documentation</a>
 * <a href="https://github.com/captain-coredump/weatherflow-udp" target="_blank">//github.com/captain-coredump/weatherflow-udp</a>
 
-There is not a straightforward cookbook approach to setting up WeeWX with a WeatherFlow Tempest; hence this document. I hope it helps someone.
+There is no straightforward cookbook approach to setting up WeeWX with a WeatherFlow Tempest; hence this document. I hope it helps someone.
 
 This document assumes basic knowledge of Linux and a Raspberry Pi if you're using one. If this does not describe you and you want a more detailed approach let me know. I (may, will) add more details in relevant places.
 
