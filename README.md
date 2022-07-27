@@ -73,7 +73,6 @@ I have the following equipment:
 
 | WeatherFlow Tempest | Raspberry Pi Zero 2 W |
 |---|---|
-| <a src="https://cdn.shopify.com/s/files/1/0012/8512/8294/products/Tempest_Hub_Mount_shopify-amazon-2020_1024x1024@2x.png" target="_blank">(image reference)</a> | <a href="https://assets.raspberrypi.com/static/51035ec4c2f8f630b3d26c32e90c93f1/2b8d7/zero2-hero.webp" target="_blank">(image reference)</a> |
 | <img src="./images/WOWTempest_Hub.png" width="200"> | <img src="./images/pizero2-hero.png" width="200"> |
 
 
