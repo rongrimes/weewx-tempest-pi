@@ -1,47 +1,43 @@
 # weewx-tempest-pi
 
-## TOC (in development)
+## Contents
 
 [Introduction](#introduction)  
 [Hardware Pieces](#hardware-pieces)  
-&nbsp;&nbsp;&nbsp;&nbsp;Full disclosure  
+&nbsp;&nbsp;&nbsp;&nbsp;[Full disclosure](#full-disclosure-)  
 [Linux, etc.](#linux-etc)  
-&nbsp;&nbsp;&nbsp;&nbsp;Editing  
-&nbsp;&nbsp;&nbsp;&nbsp;Introduction  
-&nbsp;&nbsp;&nbsp;&nbsp;Installation  
-&nbsp;&nbsp;&nbsp;&nbsp;dietpi  
+&nbsp;&nbsp;&nbsp;&nbsp;[Editing](#editing)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Introduction](#introduction)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Installation](#installation)  
+&nbsp;&nbsp;&nbsp;&nbsp;[dietpi](#dietpi) 
 [WeeWX](#weewx)  
-&nbsp;&nbsp;&nbsp;&nbsp;Retrieve, Install WeeWX  
-&nbsp;&nbsp;&nbsp;&nbsp;Installation Notes  
-&nbsp;&nbsp;&nbsp;&nbsp;Status  
+&nbsp;&nbsp;&nbsp;&nbsp;[Retrieve, Install WeeWX](#retrieve-install-weewx)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Installation Notes](#installation-notes)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Status](#status)  
 [Install WeatherFlow Tempest module](#install-weatherflow-tempest-module)  
-&nbsp;&nbsp;&nbsp;&nbsp;Retrieve weatherflow UDP code  
-&nbsp;&nbsp;&nbsp;&nbsp;Install  
-&nbsp;&nbsp;&nbsp;&nbsp;[[Station]]  
-&nbsp;&nbsp;&nbsp;&nbsp;Replace [Simulator] section with [WeatherFlowUDP] content  
-&nbsp;&nbsp;&nbsp;&nbsp;[[sensor_map]]  
-&nbsp;&nbsp;&nbsp;&nbsp;Get Your Station Identification  
+&nbsp;&nbsp;&nbsp;&nbsp;[Retrieve weatherflow UDP code](#retrieve-weatherflow-udp-code)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Install](#install)  
+&nbsp;&nbsp;&nbsp;&nbsp;[[[Station]]](#station)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Replace [Simulator] section with [WeatherFlowUDP] content](#replace-simulator-section-with-weatherflowudp-content)  
+&nbsp;&nbsp;&nbsp;&nbsp;[[[sensor_map]]](#sensor-map)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Get Your Station Identification](#get-your-station-identification)  
 [Insert your Serial number into weewx.conf](#insert-your-serial-number-into-weewxconf)  
-&nbsp;&nbsp;&nbsp;&nbsp;View web pages  
-&nbsp;&nbsp;&nbsp;&nbsp;Turn off Station Identification  
+&nbsp;&nbsp;&nbsp;&nbsp;[View web pages](#view-web-pages)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Turn off Station Identification](#turn-off-station-identification)  
 [Further Configuration](#further-configuration)  
-&nbsp;&nbsp;&nbsp;&nbsp;Measurement Units  
+&nbsp;&nbsp;&nbsp;&nbsp;[Measurement Units](#measurement-units)  
 [Seeing Results](#seeing-results)  
-&nbsp;&nbsp;&nbsp;&nbsp; WeatherFlow Tempest Website  
-&nbsp;&nbsp;&nbsp;&nbsp;WeeWX Output using FTP  
-&nbsp;&nbsp;&nbsp;&nbsp;WeeWX Map  
-&nbsp;&nbsp;&nbsp;&nbsp;Weather Underground  
-&nbsp;&nbsp;&nbsp;&nbsp;Steps: Weather Underground  
-&nbsp;&nbsp;&nbsp;&nbsp;Steps: Tempest Website  
-&nbsp;&nbsp;&nbsp;&nbsp;AWEKAS  
-&nbsp;&nbsp;&nbsp;&nbsp;PWS Weather  
-&nbsp;&nbsp;&nbsp;&nbsp;Weathercloud  
-&nbsp;&nbsp;&nbsp;&nbsp;WOW  
-&nbsp;&nbsp;&nbsp;&nbsp;# WOW Site Data Preferences  
-&nbsp;&nbsp;&nbsp;&nbsp;# Debugging the link  
+&nbsp;&nbsp;&nbsp;&nbsp;[WeatherFlow Tempest Website](#weatherflow-tempest-website)  
+&nbsp;&nbsp;&nbsp;&nbsp;[WeeWX Output using FTP](#weewx-output-using-ftp)  
+&nbsp;&nbsp;&nbsp;&nbsp;[WeeWX Map](#weewx-map)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Weather Underground](#weather-underground)  
+&nbsp;&nbsp;&nbsp;&nbsp;[AWEKAS](#awekas)  
+&nbsp;&nbsp;&nbsp;&nbsp;[PWS Weather](#pws-weather)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Weathercloud](#weathercloud)  
+&nbsp;&nbsp;&nbsp;&nbsp;[WOW](#wow)  
 [Implementation Notes](#implementation-notes)  
-&nbsp;&nbsp;&nbsp;&nbsp;Transfer from a Raspberry Pi 4 2GB to a Raspberry Pi Zero 2  
-&nbsp;&nbsp;&nbsp;&nbsp;Network Connection: Wireless > Ethernet  
+&nbsp;&nbsp;&nbsp;&nbsp;[Transfer from a Raspberry Pi 4 2GB to a Raspberry Pi Zero 2](#transfer-from-a-raspberry-pi-4-2gb-to-a-raspberry-pi-zero-2)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Network Connection: Wireless > Ethernet](#network-connection-wireless--ethernet)  
 
 ---
 
@@ -51,7 +47,7 @@ This document describes setting up [WeeWX](https://weewx.com/) to process the re
 * <a href="https://weewx.com/docs.html" target="_blank">WeeWX documentation</a>
 * <a href="https://github.com/captain-coredump/weatherflow-udp" target="_blank">//github.com/captain-coredump/weatherflow-udp</a>
 
-There is no straightforward cookbook approach to setting up WeeWX with a WeatherFlow Tempest; hence this document. I hope it helps someone.
+There is no single cookbook approach to setting up WeeWX with a WeatherFlow Tempest; hence this document. I hope it helps someone.
 
 This document assumes basic knowledge of Linux and a Raspberry Pi if you're using one. If this does not describe you and you want a more detailed approach let me know. I (may, will) add more details in relevant places.
 
