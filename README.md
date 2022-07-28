@@ -43,7 +43,7 @@
 
 ## Introduction
 
-This document describes setting up [WeeWX](https://weewx.com/) to process the results from a [**WeatherFlow Tempest**](https://weatherflow.com/tempest-weather-system/) and is derived from:
+This document describes setting up <a href="https://weewx.com/" target="_blank">WeeWX</a> to process the results from a <a href="https://weatherflow.com/tempest-weather-system/" target="_blank">**WeatherFlow Tempest**</a> and is derived from:
 * <a href="https://weewx.com/docs.html" target="_blank">WeeWX documentation</a>
 * <a href="https://github.com/captain-coredump/weatherflow-udp" target="_blank">//github.com/captain-coredump/weatherflow-udp</a>
 
@@ -112,7 +112,7 @@ Size: 270MB
 - Configure _ssh_ to run for remote access.
 
 ### dietpi
-I tried to install _weewx_ with the [**dietpi**](https://dietpi.com/) distro. _weewx_ found all sorts of modules missing and it just wasn't worth the effort to continue. 
+I tried to install _weewx_ with the <a href="https://dietpi.com/" target="_blank">**dietpi**</a> distro. _weewx_ found all sorts of modules missing and it just wasn't worth the effort to continue. 
 
 ---
 
@@ -121,8 +121,8 @@ I tried to install _weewx_ with the [**dietpi**](https://dietpi.com/) distro. _w
 ### Retrieve, Install WeeWX
 
 From the WeeWx Documentation, follow the topics:
-- [Configure apt](https://weewx.com/docs/debian.htm#configure_apt) - shows the specifics of retrieving WeeWX with *apt*.
-- [Install](https://weewx.com/docs/debian.htm#Install) WeeWX
+- <a href="https://weewx.com/docs/debian.htm#configure_apt" target="_blank">Configure apt</a> - shows the specifics of retrieving WeeWX with *apt*.
+- <a href="https://weewx.com/docs/debian.htm#Install" target="_blank">Install</a> WeeWX
 
 #### Installation Notes
 
@@ -153,7 +153,7 @@ On the WeeWX Installation page, follow the topics:
 ## Install WeatherFlow Tempest module
 
 ### Retrieve weatherflow UDP code
-1. Visit https://github.com/captain-coredump/weatherflow-udp
+1. Visit <a href="https://github.com/captain-coredump/weatherflow-udp" target="_blank">https://github.com/captain-coredump/weatherflow-udp</a>
 1. Download the .ZIP download of the project from the GitHub web interface
    1. Button: `CODE`
    1. Choose `Download ZIP`
@@ -214,7 +214,7 @@ In the `[Station]` section near the top of the configuration file, edit:
         # lightningZZZ = energy.AR-00004444.evt_strike
 
 ```
-(original source: https://github.com/captain-coredump/weatherflow-udp)
+(original source: <a href="https://github.com/captain-coredump/weatherflow-udp" target="_blank">https://github.com/captain-coredump/weatherflow-udp</a>)
 
 I edited the top part to be:
 ```
@@ -252,7 +252,7 @@ Replace the sensor_map section with the following content:
         #lightningXXX = distance.ST-00000025.evt_strike
         #lightningYYY = energy.ST-00000025.evt_strike
 ```
-ref: https://github.com/captain-coredump/weatherflow-udp/blob/master/sample_Tempest_sensor_map.
+ref: <a href="https://github.com/captain-coredump/weatherflow-udp/blob/master/sample_Tempest_sensor_map" target="_blank">https://github.com/captain-coredump/weatherflow-udp/blob/master/sample_Tempest_sensor_map</a>.
 
 ---
 
@@ -431,14 +431,14 @@ There are two ways to get your Tempest weather data published to Weather Undergr
 1. The *weewx* configuration file can be set up to send data to Weather Underground. See the section in the configuration file: `[[Wunderground]]` 
 
 #### Steps: Weather Underground
-1. Navigate to `www.weatherunderground.com`
+1. Navigate to <a href="http://www.weatherunderground.com" target="_blank">http://www.weatherunderground.com</a>
 1. Login to the site. (Use **Join** if you're a new member.)
 1. In **My Profile**, go to **My Devices**.
 1. Use **Add New Device** and provide data as prompted.
 1. From the *Devices* page, record your **ID** and **Key**.
 
 #### Steps: Tempest Website
-1. Go to `https://tempestwx.com/` and login with the same username & password that you created for the mobile app.
+1. Go to <a href="https://tempestwx.com/" target="_blank">https://tempestwx.com/</a> and login with the same username & password that you created for the mobile app.
 1. Navigate: **Settings > Stations > (Your station) > Public Data > Weather Underground**
 1. Enter your *Station ID* and *Station Key* for Weather Underground from above, and enable the **Send Rain** switch.
 1. Click **<** at the top of the page to exit.
@@ -529,7 +529,7 @@ To get your weather results displayed with Weathercloud:
         key = redacted
 ```
 5. Save the configuration file. 
-1. Visit https://github.com/matthewwall/weewx-wcloud, and follow the directions to install wcloud - the weewx extension that sends data to WeatherCloud.
+1. Visit <a href="https://github.com/matthewwall/weewx-wcloud" target="_blank">https://github.com/matthewwall/weewx-wcloud</a>, and follow the directions to install wcloud - the weewx extension that sends data to WeatherCloud.
 1. Restart *weewx*.
 ```
     sudo /etc/init.d/weewx restart
