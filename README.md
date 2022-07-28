@@ -19,7 +19,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[Install](#install)  
 &nbsp;&nbsp;&nbsp;&nbsp;[[[Station]]](#station)  
 &nbsp;&nbsp;&nbsp;&nbsp;[Replace [Simulator] section with [WeatherFlowUDP] content](#replace-simulator-section-with-weatherflowudp-content)  
-&nbsp;&nbsp;&nbsp;&nbsp;[[[sensor_map]]](#sensor-map)  
+&nbsp;&nbsp;&nbsp;&nbsp;[[[sensor_map]]](#sensor_map)  
 &nbsp;&nbsp;&nbsp;&nbsp;[Get Your Station Identification](#get-your-station-identification)  
 [Insert your Serial number into weewx.conf](#insert-your-serial-number-into-weewxconf)  
 &nbsp;&nbsp;&nbsp;&nbsp;[View web pages](#view-web-pages)  
@@ -100,7 +100,12 @@ If you're using Ubuntu, Linux Mint, or other Linux, skip this section and jump t
 ### Installation
 
 I am using:<br/>
-![Raspberrpi Lite (64-bit)](images/RPi64Lite.png)
+```
+Raspberry Pi OS Lite
+Release Date: April 4th, 2022
+System: 64-bit
+Size: 270MB
+```
 
 - Install onto an SD card as usual (I use _rpi_imager_)
 - Install SD card into the Pi Zero and start up as usual.
