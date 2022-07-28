@@ -9,7 +9,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[Editing](#editing)  
 &nbsp;&nbsp;&nbsp;&nbsp;[Introduction](#introduction)  
 &nbsp;&nbsp;&nbsp;&nbsp;[Installation](#installation)  
-&nbsp;&nbsp;&nbsp;&nbsp;[dietpi](#dietpi) 
+&nbsp;&nbsp;&nbsp;&nbsp;[dietpi](#dietpi)  
 [WeeWX](#weewx)  
 &nbsp;&nbsp;&nbsp;&nbsp;[Retrieve, Install WeeWX](#retrieve-install-weewx)  
 &nbsp;&nbsp;&nbsp;&nbsp;[Installation Notes](#installation-notes)  
