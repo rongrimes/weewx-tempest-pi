@@ -1,6 +1,6 @@
 # weewx-tempest-pi
 
-## Contents 
+## Contents
 
 [Introduction](#introduction)  
 [Hardware Pieces](#hardware-pieces)  
